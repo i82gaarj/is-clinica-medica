@@ -59,7 +59,7 @@
 
 #### Requisitos no funcionales
 * Sistema operativo Linux
-* MS2
-* Interfaz CLI (máquina de comandos)
+* Interfaz CLI (línea de comandos)
 * Lenguaje de implementación: C++
-* Gran espacio de almacenamiento
+* Estabilidad del software
+* Rendimiento del software
