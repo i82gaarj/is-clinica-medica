@@ -14,6 +14,7 @@ Como *secretario* quiero *introducir los datos de un usuario* para *guardar su h
 * No es necesario utilizar el nombre completo.
 * Se debe mostrar un mensaje de confirmación si se ha añadido correctamente.
 
+
 **ID**: 02
 **Nombre**: Eliminar a un paciente
 
@@ -31,6 +32,7 @@ Como *secretario* quiero *eliminar los datos de un usuario* para *eliminar aquel
 * Se debe mostrar un mensaje de confirmación si se ha eliminado correctamente.
 * Se debe mostrar un mensaje de error si el paciente no existe.
 
+
 **ID**: 03
 **Nombre**: Mostrar una lista de todos los pacientes
 
@@ -45,6 +47,7 @@ Como *secretario* quiero *ver a todos los pacientes* para *consultar la informac
 #### Validación
 
 * Se debe mostrar un mensaje si no hay ningún paciente.
+
 
 **ID**: 04
 **Nombre**: Buscar a un paciente por nombre y apellidos
@@ -63,6 +66,7 @@ Como *secretario* quiero *buscar a un paciente* para *consultar información rel
 * Se debe mostrar un mensaje de error si el paciente no existe.
 * Al encontrar al paciente, se deben mostrar una lista de opciones (añadir, modificar o eliminar tratamiento, modificar datos, mostrar citas).
 
+
 **ID**: 05
 **Nombre**: Mostrar historial de un paciente
 
@@ -78,6 +82,7 @@ Como *secretario* quiero *ver el historial de mis pacientes* para *evaluar los t
 
 * Se debe mostrar un mensaje si el historial está vacío.
 * Se debe mostrar un mensaje de error si el paciente no existe.
+
 
 **ID**: 06
 **Nombre**: Modificar el tratamiento de un paciente
@@ -95,6 +100,7 @@ Como *secretario* quiero *modificar el tratamiento de mis pacientes*.
 * Se debe mostrar un mensaje si no tiene tratamiento actual.
 * Se debe mostrar un mensaje de error si el paciente no existe.
 
+
 **ID**: 07
 **Nombre**: Modificar datos de un paciente
 
@@ -109,6 +115,7 @@ Como *secretario* quiero *modificar los datos de mis pacientes* para *corregir p
 #### Validación
 
 * Se debe mostrar un mensaje de error si el paciente no existe.
+
 
 **ID**: 08
 **Nombre**: Mostrar citas de un paciente
@@ -126,6 +133,7 @@ Como *secretario* quiero *ver las citas de mis pacientes* para *evaluar los trat
 * Se debe mostrar un mensaje si el historial de citas está vacío.
 * Se debe mostrar un mensaje de error si el paciente no existe.
 
+
 **ID**: 09
 **Nombre**: Añadir cita a un paciente
 
@@ -141,6 +149,7 @@ Como *secretario* quiero *añadir citas a mis pacientes* para *llevar un control
 
 * Se debe mostrar un mensaje de error si la cita coincide con otra.
 * Se debe mostrar un mensaje de error si el paciente no existe.
+
 
 **ID**: 10
 **Nombre**: Eliminar cita de un paciente
@@ -158,6 +167,7 @@ Como *secretario* quiero *cancelar citas a mis pacientes* para *llevar un contro
 * Se debe mostrar un mensaje de error si el paciente no existe.
 * Se debe mostrar un mensaje de error si el paciente no tiene ninguna cita próxima.
 
+
 **ID**: 11
 **Nombre**: Añadir tratamiento a un paciente
 
@@ -173,4 +183,3 @@ Como *secretario* quiero *añadir tratamientos a mis pacientes* para *gestionarl
 
 
 * Se debe mostrar un mensaje de error si el paciente no existe.
-
