@@ -1,7 +1,7 @@
 ## Eliminar la cita de un paciente
 
 **ID**: 10
-**Descripción**: Una vez seleccionado el paciente, el sistema muestra las citas del mismo y al seleccionar la cita que se desea eliminar, el sistema lo ejecuta 
+**Descripción**: Una vez seleccionado el paciente, el sistema muestra su última cita y el secretario confirma su eliminación.
 
 **Actores principales**: Secretario
 **Actores secundarios**: Paciente
