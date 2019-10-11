@@ -7,7 +7,9 @@
 **Actores secundarios**: Paciente
 
 **Precondiciones**:
-* Ninguna
+* El paciente debe existir en el sistema.
+* Haber seleccionado a un paciente con anterioridad.
+
 
 **Flujo principal**:
 1. El secretario desea consultar el historial de medicación de un paciente 

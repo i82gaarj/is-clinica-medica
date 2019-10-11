@@ -8,6 +8,7 @@
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.
+* Haber seleccionado a un paciente con anterioridad.
 
 **Flujo principal**:
 1. El secretario desea modificar el tratamiento de un paciente.
