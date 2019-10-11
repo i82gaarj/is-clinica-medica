@@ -79,3 +79,98 @@ Como *secretario* quiero *ver el historial de mis pacientes* para *evaluar los t
 * Se debe mostrar un mensaje si el historial está vacío.
 * Se debe mostrar un mensaje de error si el paciente no existe.
 
+**ID**: 06
+**Nombre**: Modificar el tratamiento de un paciente
+
+**Prioridad** (de 1 a 10): 5
+**Puntos estimado**: 3
+**Iteración**: 1
+
+#### Descripción
+
+Como *secretario* quiero *modificar el tratamiento de mis pacientes*.
+
+#### Validación
+
+* Se debe mostrar un mensaje si no tiene tratamiento actual.
+* Se debe mostrar un mensaje de error si el paciente no existe.
+
+**ID**: 07
+**Nombre**: Modificar datos de un paciente
+
+**Prioridad** (de 1 a 10): 5
+**Puntos estimado**: 3
+**Iteración**: 1
+
+#### Descripción
+
+Como *secretario* quiero *modificar los datos de mis pacientes* para *corregir posibles errores*.
+
+#### Validación
+
+* Se debe mostrar un mensaje de error si el paciente no existe.
+
+**ID**: 08
+**Nombre**: Mostrar citas de un paciente
+
+**Prioridad** (de 1 a 10): 5
+**Puntos estimado**: 3
+**Iteración**: 1
+
+#### Descripción
+
+Como *secretario* quiero *ver las citas de mis pacientes* para *evaluar los tratamientos posteriores*.
+
+#### Validación
+
+* Se debe mostrar un mensaje si el historial de citas está vacío.
+* Se debe mostrar un mensaje de error si el paciente no existe.
+
+**ID**: 09
+**Nombre**: Añadir cita a un paciente
+
+**Prioridad** (de 1 a 10): 7
+**Puntos estimado**: 3
+**Iteración**: 1
+
+#### Descripción
+
+Como *secretario* quiero *añadir citas a mis pacientes* para *llevar un control de horarios*.
+
+#### Validación
+
+* Se debe mostrar un mensaje de error si la cita coincide con otra.
+* Se debe mostrar un mensaje de error si el paciente no existe.
+
+**ID**: 10
+**Nombre**: Eliminar cita de un paciente
+
+**Prioridad** (de 1 a 10): 6
+**Puntos estimado**: 3
+**Iteración**: 1
+
+#### Descripción
+
+Como *secretario* quiero *cancelar citas a mis pacientes* para *llevar un control de horarios*.
+
+#### Validación
+
+* Se debe mostrar un mensaje de error si el paciente no existe.
+* Se debe mostrar un mensaje de error si el paciente no tiene ninguna cita próxima.
+
+**ID**: 11
+**Nombre**: Añadir tratamiento a un paciente
+
+**Prioridad** (de 1 a 10): 7
+**Puntos estimado**: 3
+**Iteración**: 1
+
+#### Descripción
+
+Como *secretario* quiero *añadir tratamientos a mis pacientes* para *gestionarlos adecuadamente*.
+
+#### Validación
+
+
+* Se debe mostrar un mensaje de error si el paciente no existe.
+
