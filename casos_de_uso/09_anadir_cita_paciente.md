@@ -1,7 +1,7 @@
 ## Añadir cita a un paciente
 
 **ID**: 09
-**Descripción**: Una vez seleccionado el paciente, se añade una nueva cita a su historial de citas.
+**Descripción**: Se añade una nueva cita a su historial de citas.
 
 **Actores principales**: Secretario
 **Actores secundarios**: Paciente
