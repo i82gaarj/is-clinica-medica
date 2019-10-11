@@ -21,4 +21,5 @@
 
 **Flujos alternativos**:
 
+* 3.a. Si no hay ningún paciente, se muestra un mensaje que lo indique.
 * 4.a. Si no existe el paciente, se muestra en la pantalla un mensaje de error.
