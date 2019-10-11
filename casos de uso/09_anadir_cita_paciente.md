@@ -8,7 +8,6 @@
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.
-* Haber seleccionado con anterioridad a un paciente.
 
 **Flujo principal**:
 1. El secretario desea añadir una nueva cita para el paciente.
