@@ -1,4 +1,4 @@
-## Añadir nuevo paciente
+## Mostrar una lista de todos los pacientes
 
 **ID**: 03
 **Descripción**: Se selecciona la opción de “Mostrar la lista de los pacientes” y el sistema imprime por pantalla los datos de los mismos.

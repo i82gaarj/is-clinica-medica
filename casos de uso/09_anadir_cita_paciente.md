@@ -1,4 +1,4 @@
-## Añadir nuevo paciente
+## Añadir cita a un paciente
 
 **ID**: 09
 **Descripción**: Una vez seleccionado el paciente, se añade una nueva cita a su historial de citas.
@@ -22,4 +22,5 @@
 
 **Flujos alternativos**:
 
-6.a. Si la cita que desea añadir coincide con otra en dicho horario, no podrá almacenarse dicha cita y además se mostrará un mensaje indicando que en ese horario ya hay una cita establecida.
+5.a. Si la cita que desea añadir coincide con otra en dicho horario, no podrá almacenarse dicha cita y además se mostrará un mensaje indicando que en ese horario ya hay una cita establecida.
+3.a. Si el paciente no existe, se muestra un mensaje de error.

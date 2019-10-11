@@ -1,4 +1,4 @@
-## Añadir nuevo paciente
+## Eliminar a un paciente
 
 **ID**: 02
 **Descripción**: Se introducen el nombre y los apellidos del paciente a eliminar y el sistema lo elimina.

@@ -1,7 +1,7 @@
-## Añadir nuevo paciente
+## Modificar el tratamiento de un paciente
 
 **ID**: 06
-**Descripción**: Se desea modificar el tratamiento actual de un paciente.
+**Descripción**: Una vez seleccionado el paciente, se modifica el tratamiento actual del mismo.
 
 **Actores principales**: Secretario
 **Actores secundarios**: Paciente
@@ -11,8 +11,8 @@
 
 **Flujo principal**:
 1. El secretario desea modificar el tratamiento de un paciente.
+1. Se le pedirá al secretario el nombre y apellidos del paciente y se buscará.
 1. El secretario selecciona la opción de modificar el tratamiento actual.
-1. Se le pedirá al secretario el nombre y apellidos del paciente y se buscará como se indica en el caso de uso 04.
 1. El sistema muestra por pantalla el tratamiento actual del paciente y pide al secretario introducir el nuevo.
 1. El secretario introduce el nuevo tratamiento.
 1. El sistema guarda el nuevo tratamiento.

@@ -1,4 +1,4 @@
-## Añadir nuevo paciente
+## Modificar datos de un paciente
 
 **ID**: 07
 **Descripción**: Una vez seleccionado el usuario que se desea modificar, el sistema, de forma secuencial pregunta qué campos desean ser modificados.
@@ -12,7 +12,7 @@
 **Flujo principal**:
 1. El secretario desea modificar los campos pertenecientes al paciente.
 1. El secretario selecciona la opción modificar paciente dentro del menú principal.
-1. El secretario realiza la búsqueda del paciente mediante nombre y apellidos como en el caso de uso 04.
+1. El secretario realiza la búsqueda del paciente mediante nombre y apellidos.
 1. El sistema muestra los campos de ese paciente y pregunta por cuál desea ser modificado.
 1. El secretario modifica el campo deseado. 
 1. El sistema vuelve a mostrar los campos anteriores en caso de que se desee modificar algún otro, hasta que el secretario seleccione la opción “Salir”.
