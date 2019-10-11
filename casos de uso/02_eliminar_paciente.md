@@ -20,5 +20,5 @@
 
 **Flujos alternativos**:
 
-4.a. Si el paciente no existe, se muestra un mensaje de error.
-4.b. Si el paciente existe en el sistema pero no ha podido ser eliminado por alguna otra causa, se muestra un mensaje de error.
+* 4.a. Si el paciente no existe, se muestra un mensaje de error.
+* 4.b. Si el paciente existe en el sistema pero no ha podido ser eliminado por alguna otra causa, se muestra un mensaje de error.

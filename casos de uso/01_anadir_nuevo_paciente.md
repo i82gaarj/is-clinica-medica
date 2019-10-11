@@ -21,5 +21,5 @@
 
 **Flujos alternativos**:
 
-4.a. Si falta algún dato del paciente por añadir, se mostrará por pantalla un mensaje de error y no podrá añadirse.
-4.b. Si el paciente que desea añadir ya está en la lista, el sistema indicará que dicho paciente ya ha sido agregado con anterioridad.
+* 4.a. Si falta algún dato del paciente por añadir, se mostrará por pantalla un mensaje de error y no podrá añadirse.
+* 4.b. Si el paciente que desea añadir ya está en la lista, el sistema indicará que dicho paciente ya ha sido agregado con anterioridad.
