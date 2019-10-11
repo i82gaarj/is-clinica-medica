@@ -24,4 +24,4 @@
 
 **Flujos alternativos**:
 
-4.a. Si no hay ningun tratamiento, el sistema lo indicará, y se podrá añadir uno nuevo.
+* 4.a. Si no hay ningun tratamiento, el sistema lo indicará, y se podrá añadir uno nuevo.
