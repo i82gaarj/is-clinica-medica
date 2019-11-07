@@ -4,7 +4,6 @@
 **Descripción**: Una vez seleccionado el paciente, el sistema muestra su última cita y el secretario confirma su eliminación.
 
 **Actores principales**: Secretario
-**Actores secundarios**: Paciente
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.
