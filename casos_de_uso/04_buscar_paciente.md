@@ -4,7 +4,6 @@
 **Descripción**: El secretario introduce el nombre y los apellidos del paciente y el sistema muestra los datos del mismo
 
 **Actores principales**: Secretario
-**Actores secundarios**: Paciente
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.

@@ -4,7 +4,6 @@
 **Descripción**: Una vez seleccionado el paciente, se añade un tratamiento.
 
 **Actores principales**: Secretario
-**Actores secundarios**: Paciente
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.

@@ -4,7 +4,6 @@
 **Descripción**: Se introducen el nombre y los apellidos del paciente a eliminar y el sistema lo elimina.
 
 **Actores principales**: Secretario
-**Actores secundarios**: Paciente
 
 **Precondiciones**:
 * El paciente debe existir en el sistema

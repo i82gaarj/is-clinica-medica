@@ -4,7 +4,6 @@
 **Descripción**: Se añade una nueva cita a su historial de citas.
 
 **Actores principales**: Secretario
-**Actores secundarios**: Paciente
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.

@@ -4,7 +4,6 @@
 **Descripción**: Se selecciona la opción de “Mostrar la lista de los pacientes” y el sistema imprime por pantalla los datos de los mismos.
 
 **Actores principales**: Secretario
-**Actores secundarios**: Paciente
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.

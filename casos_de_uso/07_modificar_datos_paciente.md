@@ -4,7 +4,6 @@
 **Descripción**: Una vez seleccionado el usuario que se desea modificar, el sistema, de forma secuencial pregunta qué campos desean ser modificados.
 
 **Actores principales**: Secretario
-**Actores secundarios**: Paciente
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.

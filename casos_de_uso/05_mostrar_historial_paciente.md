@@ -4,7 +4,6 @@
 **Descripción**: Una vez encontrado un paciente, se selecciona la opción "mostrar historial de medicación", y el sistema lo muestra.
 
 **Actores principales**: Secretario
-**Actores secundarios**: Paciente
 
 **Precondiciones**:
 * El paciente debe existir en el sistema.
