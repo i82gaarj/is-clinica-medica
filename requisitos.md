@@ -2,7 +2,7 @@
 
 #### Partes interesadas:
 * Secretario
-* Pacientes
+* Desarrolladores
 
 #### Datos que gestiona el sistema:
 * Pacientes
