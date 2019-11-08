@@ -1,3 +1,3 @@
 ## Diagrama de clases
 
-![Diagrama de clases](diagrama de clases.png)
+![Diagrama de clases](diagrama_de_clases.png)
