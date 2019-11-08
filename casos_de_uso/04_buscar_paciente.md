@@ -1,6 +1,6 @@
 ## Buscar a un paciente por nombre y apellidos
 
-**ID**: 01
+**ID**: 04
 **Descripción**: El secretario introduce el nombre y los apellidos del paciente y el sistema muestra los datos del mismo
 
 **Actores principales**: Secretario
