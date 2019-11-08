@@ -1,4 +1,4 @@
-## Añadir nuevo paciente
+## Mostrar historial de un paciente
 
 **ID**: 05
 **Descripción**: Una vez encontrado un paciente, se selecciona la opción "mostrar historial de medicación", y el sistema lo muestra.
