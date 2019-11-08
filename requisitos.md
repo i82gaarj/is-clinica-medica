@@ -40,14 +40,12 @@
 2. Eliminar a un paciente
 3. Mostrar una lista de los pacientes
 4. Buscar a un paciente por nombre y apellidos
-5. Mostrar el historial de medicación de un paciente
-    - Anterioridad
-	- Actual
-6. Mostrar el historial médico de un paciente
+5. Mostrar el historial médico de un paciente
     - Enfermedades
 	- Operaciones
 	- Análisis
 	- Alergias
+6. Modificar tratamiento actual de un paciente
 7. Modificar datos de un paciente
 8. Mostrar todas las citas previas de un paciente
     - Fecha
@@ -56,6 +54,8 @@
 	- Fecha
 	- Hora
 10. Eliminar cita de un paciente
+11. Añadir tratamiento a un paciente
+12. Modificar cita de un paciente
 
 #### Requisitos no funcionales
 * Sistema operativo Linux
@@ -63,3 +63,5 @@
 * Lenguaje de implementación: C++
 * Estabilidad del software
 * Rendimiento del software
+* Pedir confirmación antes de borrar algún dato
+* Evitar borrado de historial médico
