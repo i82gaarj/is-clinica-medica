@@ -22,4 +22,4 @@
 **Flujos alternativos**:
 
 * 3.a. Si el paciente no existe, se muestra un mensaje de error.
-* 4.a. Si no tiene historial se mostrará un mensaje indicándolo.
+* 5.a. Si no tiene historial se mostrará un mensaje indicándolo.
