@@ -9,7 +9,8 @@
 * El paciente debe existir en el sistema.
 
 **Flujo principal**:
-1. El secretario desea consultar el historial de medicación de un paciente 
+1. El secretario desea consultar el historial de medicación de un paciente.
+1. El secretario selecciona la opción de buscar paciente.
 1. Se le pedirá al secretario el nombre y apellidos del paciente y se buscará.
 1. Una vez encontrado, el secretario selecciona la opción para mostrar el historial de medicación.
 1. El sistema muestra por pantalla el historial de medicación del paciente seleccionado.
@@ -20,5 +21,5 @@
 
 **Flujos alternativos**:
 
-* 2.a. Si el paciente no existe, se muestra un mensaje de error.
-* 4.a. Si no tiene medicación en vigor se mostrará un mensaje indicándolo.
+* 3.a. Si el paciente no existe, se muestra un mensaje de error.
+* 4.a. Si no tiene historial se mostrará un mensaje indicándolo.
