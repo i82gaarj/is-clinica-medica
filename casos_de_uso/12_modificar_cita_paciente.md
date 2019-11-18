@@ -1,6 +1,6 @@
 ## Modificar cita de un paciente
 
-**ID**: 09
+**ID**: 12
 **Descripción**: Se modifica la última cita asignada.
 
 **Actores principales**: Secretario
