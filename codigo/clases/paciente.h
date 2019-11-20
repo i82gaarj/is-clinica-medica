@@ -1,21 +1,30 @@
+#ifndef PACIENTE_H
+#define PACIENTE_H
 #include <string>
 #include "historial.h"
 
 class Paciente{
 private:
-    string nombre_;
-    string apellidos_;
-    int edad_;
+    string DNI;
+    string nombreCompleto_;
+    string fechaNacimiento;
     int telefono_;
     char sexo_;
     Historial h_;
 public:
     Paciente();
 
-    anadir();
-    modificar();
-    eliminar();
+    bool anadir();
+    bool modificar();
+    bool eliminar();
 
-    mostrar_historial_medico();
-    mostrar_historial_citas();
+    void mostrar_historial_medico();
+
+    string getNombre();
+    string getFechaNacimiento();
+    char getSexo();
+    int getTelefono();
+    int getDNI();
 };
+
+#endif

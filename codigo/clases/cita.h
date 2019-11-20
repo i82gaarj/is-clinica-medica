@@ -1,3 +1,5 @@
+#ifndef CITA_H
+#define CITA_H
 
 class Cita{
 private:
@@ -12,9 +14,12 @@ public:
     inline getFecha(){
         return fecha_;
     }
+
     inline getHora(){
         return hora_;
     }
 
     getFechaHora();
 };
+
+#endif
