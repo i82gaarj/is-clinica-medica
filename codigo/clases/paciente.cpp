@@ -1,3 +1,3 @@
 Paciente::mostrar_historial_medico(){
-    h_.mostrar();
+    h_.mostrar(*this);
 }
