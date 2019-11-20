@@ -16,4 +16,6 @@ public:
     modificar();
     eliminar();
 
+    mostrar_historial_medico();
+    mostrar_historial_citas();
 };
