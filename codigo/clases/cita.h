@@ -11,9 +11,7 @@ private:
     int duracion_;
     
 public:
-    Cita(string fecha, string hora, int duracion){
-        *this -> setFechaHoraDuracion(fecha, hora, duracion);
-    }
+    Cita(string fecha, string hora, int duracion);
 
     inline string getFecha(){
         return fecha_;
