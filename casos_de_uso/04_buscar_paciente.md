@@ -12,11 +12,11 @@
 1. El secretario quiere consultar los datos de algún paciente en concreto
 1. El secretario comienza seleccionando la opción del menú principal que corresponde a "Buscar paciente".
 1. El secretario introduce el nombre y los apellidos del paciente.
-1. El sistema muestra por pantalla los datos del paciente correspondiente.
+1. El sistema muestra por pantalla los datos del paciente correspondiente y su tratamiento actual.
 
 **Postcondiciones**:
 
-* Se muestra al secretario si desea hacer alguna operación con el paciente.
+* Se muestra al secretario una lista de opciones sobre el paciente.
 
 **Flujos alternativos**:
 

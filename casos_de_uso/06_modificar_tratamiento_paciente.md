@@ -18,7 +18,7 @@
 
 **Postcondiciones**:
 
-* Se muestra al secretario si desea hacer alguna operación más con el nuevo paciente.
+* Se muestra al secretario si desea hacer alguna operación más con el paciente.
 
 **Flujos alternativos**:
 

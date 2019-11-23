@@ -15,7 +15,7 @@
 1. El sistema elimina al paciente de la lista.
 
 **Postcondiciones**:
-* Se muestra al secretario si desea hacer alguna operación más con el nuevo paciente.
+* Ninguna
 
 **Flujos alternativos**:
 
