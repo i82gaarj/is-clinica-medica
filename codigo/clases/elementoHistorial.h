@@ -11,12 +11,18 @@ public:
     inline string getFecha(){
         return fecha_;
     }
+    
     inline string getObservaciones(){
         return observaciones_;
     }
 
-    void setFecha();
-    void setObservaciones(string observaciones);
+    inline void setFecha(string fecha){
+        fecha_ = fecha;
+    }
+
+    inline void setObservaciones(string observaciones){
+        observaciones_ = observaciones;
+    }
 };
 
 #endif

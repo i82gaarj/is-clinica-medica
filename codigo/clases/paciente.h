@@ -1,7 +1,9 @@
 #ifndef PACIENTE_H
 #define PACIENTE_H
 #include <string>
-#include "historial.h"
+#include "elementoHistorial.h"
+#include "tratamiento.h"
+#include "cita.h"
 
 using std::string;
 
@@ -13,9 +15,10 @@ private:
     int telefono_;
     char sexo_;
     string direccion_;
+    Tratamiento tratamiento_;
 
 public:
-    Paciente();
+    Paciente(string dni, string nombreCompleto);
 
     void mostrar_historial_medico();
 
@@ -65,6 +68,20 @@ public:
 
     inline void setDireccion(string direccion){
         direccion_ = direccion;
+    }
+
+    inline Tratamiento getTratamiento(){
+        return tratamiento_;
+    }
+
+    inline void setTratamiento(){
+        tratamiento_ = tratamiento;
+    }
+
+    bool addCita(Cita cita);
+    
+    inline void finalizarTratamiento(){
+        tratamiento_ = NULL;
     }
 };
 
