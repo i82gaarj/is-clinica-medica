@@ -20,29 +20,29 @@ private:
 public:
     Paciente(string dni, string nombreCompleto);
 
-    void mostrar_historial_medico();
+    void mostrar_historial_medico() const;
 
-    inline string getNombre(){
+    inline string getNombre() const{
         return nombreCompleto_;
     }
 
-    inline string getFechaNacimiento(){
+    inline string getFechaNacimiento() const{
         return fechaNacimiento_;
     }
 
-    inline char getSexo(){
+    inline char getSexo() const{
         return sexo_;
     }
 
-    inline int getTelefono(){
+    inline int getTelefono() const{
         return telefono_;
     }
 
-    inline int getDNI(){
+    inline int getDNI() const{
         return dni_;
     }
 
-    inline string getDireccion(){
+    inline string getDireccion() const{
         return direccion_;
     }
 
@@ -70,7 +70,7 @@ public:
         direccion_ = direccion;
     }
 
-    inline Tratamiento getTratamiento(){
+    inline Tratamiento getTratamiento() const{
         return tratamiento_;
     }
 

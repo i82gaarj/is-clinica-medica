@@ -13,15 +13,15 @@ private:
 public:
     Cita(string fecha, string hora, int duracion);
 
-    inline string getFecha(){
+    inline string getFecha() const{
         return fecha_;
     }
 
-    inline string getHora(){
+    inline string getHora() const{
         return hora_;
     }
 
-    inline int getDuracion(){
+    inline int getDuracion() const{
         return duracion_;
     }
 
@@ -37,7 +37,7 @@ public:
         duracion_ = duracion;
     }
 
-    string getFechaHoraDuracion(); // devuelve info completa
+    string getFechaHoraDuracion() const; // devuelve info completa
 
     string setFechaHoraDuracion(string fecha, string hora, int duracion); // función grande, comprobar si no solapa otra cita
 };
