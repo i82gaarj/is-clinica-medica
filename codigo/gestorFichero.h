@@ -38,7 +38,7 @@ public:
 
     list <ElementoHistorial> getHistorialPaciente(Paciente p);
 
-    bool buscarPaciente(Paciente p);
+    bool buscarPaciente(string nombreCompleto);
 
     void modificarTratamientoPaciente(Paciente p);
 
