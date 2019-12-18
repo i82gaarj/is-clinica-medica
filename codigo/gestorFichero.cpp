@@ -16,7 +16,7 @@ void anadirPaciente(Paciente p){
 
 }
 
-void getDatosPaciente(Paciente p){
+Paciente getDatosPaciente(string DNI){
 
 }
 
@@ -40,7 +40,7 @@ list <ElementoHistorial> getHistorialPaciente(Paciente p){
 
 }
 
-bool buscarPaciente(string nombreCompleto){
+bool buscarPaciente(string DNI){
 
 }
 
@@ -49,5 +49,9 @@ void modificarTratamientoPaciente(Paciente p){
 }
 
 void modificarCitaPaciente(Paciente p){
+
+}
+
+bool eliminarPaciente(string DNI){
 
 }
