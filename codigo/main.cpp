@@ -42,10 +42,9 @@ int main() {
 			Paciente p(DNI, nombrec, fechn, num, sexo, direc);
 			GestorFichero f;
 			f.anadirPaciente(p);
-		}
-		break;
+		}break;
 
-		case 2:
+		case 2:{
 
 			string DNI;
 
@@ -55,9 +54,9 @@ int main() {
 			GestorFichero f;
 			f.eliminarPaciente(DNI);
 
-		break;
+		}break;
 
-		case 3:
+		case 3:{
 
 			string DNI;
 
@@ -138,14 +137,14 @@ int main() {
 				}
 			}
 
-		break;
+		}break;
 
 		case 4:{
 			string DNI;
 			cout << "Introduzca dni";
 			cin >> DNI;
 			GestorFichero f;
-			if (f.buscarPaciente == true){
+			if (f.buscarPaciente(DNI3) == true){
 				Paciente aux = f.getDatosPaciente(DNI);
 				cout << "aqui los datos" << endl;
 
@@ -172,14 +171,25 @@ int main() {
 		}break;
 
 		case 5:{
+			cout << "Introduzca el DNI del paciente al que quiere añadir la cita" <<endl;
+			string DNI3;
+			cin >> DNI3;
 
+			GestorFichero f;
+			
+			if(f.buscarPaciente(DNI3)==true){
+
+				//añadir cita
+			}
+			else{
+
+				cout << "el DNI introducido no se corresponde a ningun paciente"<<endl;
+			}
 		}break;
 
 		case 6:{
 
-		}break;
-
-		case 7:{
+			exit();
 
 		}break;
 

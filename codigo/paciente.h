@@ -4,6 +4,7 @@
 #include "elementoHistorial.h"
 #include "tratamiento.h"
 #include "cita.h"
+#include "gestorFichero.h"
 
 using std::string;
 
@@ -38,7 +39,7 @@ public:
         return telefono_;
     }
 
-    inline int getDNI() const{
+    inline string getDNI() const{
         return dni_;
     }
 
@@ -74,15 +75,23 @@ public:
         return tratamiento_;
     }
 
-    inline void setTratamiento(){
+    inline void setTratamiento(Tratamiento tratamiento){
         tratamiento_ = tratamiento;
     }
 
     bool addCita(Cita cita);
     
-    inline void finalizarTratamiento(){
+    /*inline void finalizarTratamiento(){
         tratamiento_ = NULL;
+    }*/
+
+    Cita getUltimaCita() const{
+        GestorFichero f;
+        Cita c = f.getUltimaCitaPaciente(dni_);
+        return c;
     }
+
+
 };
 
 #endif

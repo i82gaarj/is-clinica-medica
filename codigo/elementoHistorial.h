@@ -2,7 +2,9 @@
 #define ELEMENTOHISTORIAL_H
 #include <string>
 
-class ElementoHistorial(){
+using namespace std;
+
+class ElementoHistorial{
 private:
     string fecha_;
     string observaciones_;
