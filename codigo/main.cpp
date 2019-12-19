@@ -8,15 +8,16 @@ int main() {
 
 	int opcion;
 	
-	cout << "Seleccione una de las siguientes opciones: " << endl;
-	cout << "1. Añadir paciente." << endl;
-	cout << "2. Eliminar paciente." << endl;
-	cout << "3. Modificar paciente." << endl;
-	cout << "4. Buscar paciente." << endl;
-	cout << "5. Añadir cita." << endl;
-	cout << "6. Salir" << endl;
+	cout << "Seleccione una de las siguientes opciones: " << endl
+		 << "1. Añadir paciente." << endl
+		 << "2. Eliminar paciente." << endl
+		 << "3. Modificar paciente." << endl
+		 << "4. Buscar paciente." << endl
+		 << "5. Añadir cita." << endl
+		 << "6. Mostrar citas de hoy." << endl
+		 << "7. Salir" << endl;
 
-	while(opcion != 6){
+	while(opcion != 7){
 		cin >> opcion;
 		switch(opcion) {
 
@@ -190,7 +191,7 @@ int main() {
 
 			case 6:{
 
-				return 0;
+				cout << "Citas de hoy" << endl;
 
 			}break;
 
