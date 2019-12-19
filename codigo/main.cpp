@@ -2,12 +2,10 @@
 #include <string>
 #include "paciente.h"
 #include "gestorFichero.h"
+
 using namespace std;
 
-int main() {
-
-	int opcion;
-	
+void mostrar_menu(){
 	cout << "Seleccione una de las siguientes opciones: " << endl
 		 << "1. Añadir paciente." << endl
 		 << "2. Eliminar paciente." << endl
@@ -16,8 +14,15 @@ int main() {
 		 << "5. Añadir cita." << endl
 		 << "6. Mostrar citas de hoy." << endl
 		 << "7. Salir" << endl;
+}
+
+int main() {
+
+	int opcion;
 
 	while(opcion != 7){
+		system("clear");
+		mostrar_menu();
 		cin >> opcion;
 		switch(opcion) {
 
@@ -33,7 +38,8 @@ int main() {
 				cout << "Introduzca el DNI:" << endl;
 				cin >> DNI;
 				cout << "Introduzca el nombre completo:" << endl;
-				cin >> nombrec;
+				cin.ignore();
+				getline(cin, nombrec);
 				cout << "Introduzca la fecha de nacimiento:" << endl;
 				cin >> fechn;
 				cout << "Introduzca el número de teléfono:" << endl;
@@ -41,7 +47,8 @@ int main() {
 				cout << "Introduzca el sexo:" << endl;
 				cin >> sexo;
 				cout << "Introduzca la dirección:" << endl;
-				cin >> direc;
+				cin.ignore();
+				getline(cin, direc);
 
 				Paciente p(DNI, nombrec, fechn, num, sexo, direc);
 				GestorFichero f;
@@ -151,19 +158,19 @@ int main() {
 					cout << "aqui los datos" << endl;
 
 					int opcion2;
-
-					switch(opcion2){
-						cin >> opcion2;
+					cin >> opcion2;
 						cout << "Seleccione: " << endl 
 							<< "1. Mostrar el historial de" << DNI3 << endl
 							<< "2. Mostrar citas de " << DNI3 << endl
 							<< "3. Cancelar cita asignada" << endl
 							<< "4. Modificar cita asignada" << endl;
+					switch(opcion2){
 						case 1:{ // mostrar historial
-
+							list <EntradaHistorial> historial = aux.get_historial_medico();
 						}break;
 						case 2:{
 							// mostrar cita de paciente
+							C
 						}break;
 						case 3:{
 							// eliminar cita

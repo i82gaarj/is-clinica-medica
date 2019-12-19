@@ -47,7 +47,7 @@ Paciente GestorFichero::getPacienteFromDNI(string DNI){
 			getline(file, telefono);
 			getline(file, sexo);
 			getline(file, direccion);
-		}
+	}
 	Paciente p(DNI, nombreCompleto, fechaNacimiento, atoi(telefono.c_str()), sexo, direccion);
 	return p;
 	}
