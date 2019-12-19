@@ -4,7 +4,6 @@
 #include "elementoHistorial.h"
 #include "tratamiento.h"
 #include "cita.h"
-#include "gestorFichero.h"
 
 using std::string;
 
@@ -14,16 +13,15 @@ private:
     string nombreCompleto_;
     string fechaNacimiento_;
     int telefono_;
-    char sexo_;
+    string sexo_;
     string direccion_;
-    Tratamiento tratamiento_;
 
 public:
-    Paciente(string dni, string nombreCompleto);
+    Paciente(string dni, string nombreCompleto, string fechaNacimiento, int telefono, string sexo, string direccion);
 
-    void mostrar_historial_medico() const;
+    void mostrar_historial_medico();
 
-    inline string getNombre() const{
+    inline string getNombreCompleto() const{
         return nombreCompleto_;
     }
 
@@ -31,7 +29,7 @@ public:
         return fechaNacimiento_;
     }
 
-    inline char getSexo() const{
+    inline string getSexo() const{
         return sexo_;
     }
 
@@ -47,7 +45,7 @@ public:
         return direccion_;
     }
 
-    inline void setNombre(string nombreCompleto){
+    inline void setNombreCompleto(string nombreCompleto){
         nombreCompleto_ = nombreCompleto;
     }
 
@@ -72,11 +70,11 @@ public:
     }
 
     inline Tratamiento getTratamiento() const{
-        return tratamiento_;
+
     }
 
     inline void setTratamiento(Tratamiento tratamiento){
-        tratamiento_ = tratamiento;
+
     }
 
     bool addCita(Cita cita);
@@ -85,12 +83,7 @@ public:
         tratamiento_ = NULL;
     }*/
 
-    Cita getUltimaCita() const{
-        GestorFichero f;
-        Cita c = f.getUltimaCitaPaciente(dni_);
-        return c;
-    }
-
+    Cita getUltimaCita();
 
 };
 

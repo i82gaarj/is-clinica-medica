@@ -2,17 +2,19 @@
 #define GESTORFICHERO_H
 #include <string>
 #include <list>
-#include "paciente.h"
 #include "cita.h"
+#include "paciente.h"
+
+using namespace std;
 
 class GestorFichero{
 private:
     string nombreFichero_;
 
 public:
-    GestorFichero(string nombreFichero);
+    GestorFichero(string nombreFichero = "pacientes.txt");
     
-    inline string nombreFichero(){
+    inline string getNombreFichero(){
         return nombreFichero_;
     }
 
@@ -26,7 +28,7 @@ public:
 
     void anadirPaciente(Paciente p);
 
-    void getDatosPaciente(Paciente p);
+    Paciente getPacienteFromDNI(string DNI);
 
     void anadirCitaPaciente(Paciente p);
 
@@ -43,6 +45,12 @@ public:
     void modificarTratamientoPaciente(Paciente p);
 
     void modificarCitaPaciente(Paciente p);
+
+    Cita getUltimaCitaPaciente(string DNI);
+
+    bool eliminarPaciente(string DNI);
+
+    bool eliminarCita(Paciente p, Cita c);
 
 };
 

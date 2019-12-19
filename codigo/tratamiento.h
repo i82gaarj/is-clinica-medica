@@ -2,6 +2,8 @@
 #define TRATAMIENTO_H
 #include <string>
 
+using namespace std;
+
 class Tratamiento{
 private:
     string medicamento_;
