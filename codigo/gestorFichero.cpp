@@ -15,7 +15,24 @@ GestorFichero::GestorFichero(string nombreFichero){
 }
 
 list <Paciente> GestorFichero::getTodosPacientes(){
+	list <Paciente> pacientes;
 
+	ifstream file(nombreFichero_.c_str());
+	if (file){
+		while(!file.eof()){
+			if (file.peek() == ifstream::traits_type::eof()){
+				break;
+			}
+
+			string dni, nombreCompleto, telefono, direccion, fechaNacimiento;
+			getline(file, dni);
+			getline(file, nombreCompleto);
+			getline(file, dni);
+			getline(file, dni);
+			getline(file, dni);
+			getline(file, dni);
+		}
+	}
 }
 
 list <Cita> GestorFichero::getCitasHoy(){
