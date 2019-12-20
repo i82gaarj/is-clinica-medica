@@ -24,15 +24,21 @@ list <Paciente> GestorFichero::getTodosPacientes(){
 				break;
 			}
 
-			string dni, nombreCompleto, telefono, direccion, fechaNacimiento;
+			string dni, nombreCompleto, telefono, direccion, sexo, fechaNacimiento;
+
 			getline(file, dni);
 			getline(file, nombreCompleto);
-			getline(file, dni);
-			getline(file, dni);
-			getline(file, dni);
-			getline(file, dni);
+			getline(file, fechaNacimiento);
+			getline(file, telefono);
+			getline(file, sexo);
+			getline(file, direccion);
+
+			Paciente p(dni, nombreCompleto, fechaNacimiento, atoi(telefono.c_str()), sexo, direccion);
+
+			pacientes.push_back(p);
 		}
 	}
+	return pacientes;
 }
 
 list <Cita> GestorFichero::getCitasHoy(){
@@ -48,29 +54,34 @@ void GestorFichero::anadirPaciente(Paciente p){
 		 << p.getTelefono() << endl
 		 << p.getSexo() << endl
 		 << p.getDireccion() << endl;
+	file.close();
+	file.open(p.getDNI() + "_citas.txt", ios::out | ios::app);
+	file.close();
+	file.open(p.getDNI() + "_historial.txt", ios::out | ios::app);
+	file.close();
+	file.open(p.getDNI() + "_tratamientos.txt", ios::out | ios::app);
 }
 
 Paciente GestorFichero::getPacienteFromDNI(string DNI){
 	fstream file;
-	file.open(nombreFichero_.c_str(), ios::in | ios::app);
-	string nombreCompleto, fechaNacimiento, sexo, direccion, telefono;
-
+	file.open(nombreFichero_.c_str(), ios::in);
+	string dni_buscar, nombreCompleto, fechaNacimiento, sexo, direccion, telefono;
 	while(!file.eof()){
-		string str;
-		getline(file, str);
-		if (DNI == str){
+		
+		getline(file, dni_buscar);
+		if (DNI == dni_buscar){
 			getline(file, nombreCompleto);
 			getline(file, fechaNacimiento);
 			getline(file, telefono);
 			getline(file, sexo);
 			getline(file, direccion);
+		}
 	}
 	Paciente p(DNI, nombreCompleto, fechaNacimiento, atoi(telefono.c_str()), sexo, direccion);
 	return p;
-	}
 }
 
-void GestorFichero::anadirCitaPaciente(Paciente p){
+void GestorFichero::anadirCitaPaciente(string DNI, Cita c){
 
 }
 
@@ -86,12 +97,32 @@ Tratamiento GestorFichero::getTratamientoPaciente(Paciente p){
 
 }
 
-list <ElementoHistorial> GestorFichero::getHistorialPaciente(Paciente p){
+list <ElementoHistorial> GestorFichero::getHistorialPaciente(string DNI){
+	fstream file;
+	file.open(DNI + "_historial.txt", ios::in);
 
+	list <ElementoHistorial> historial;
+	while(!file.eof()){
+		string fecha, observaciones;
+		getline(file, fecha);
+		getline(file, observaciones);
+		ElementoHistorial h(fecha, observaciones);
+		historial.push_back(h);
+	}
+	return historial;
 }
 
 bool GestorFichero::buscarPaciente(string DNI){
-
+	fstream file;
+	file.open(nombreFichero_.c_str(), ios::in);
+	string dni_buscar;
+	while(!file.eof()){
+		getline(file, dni_buscar);
+		if (DNI == dni_buscar){
+			return true;
+		}
+	}
+	return false;
 }
 
 void GestorFichero::modificarTratamientoPaciente(Paciente p){
@@ -111,5 +142,9 @@ bool GestorFichero::eliminarCita(Paciente p, Cita c){
 }
 
 Cita GestorFichero::getUltimaCitaPaciente(string DNI){
+
+}
+
+void GestorFichero::anadirHistorialPaciente(string DNI, ElementoHistorial h){
 
 }

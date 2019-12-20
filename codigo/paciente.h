@@ -19,8 +19,6 @@ private:
 public:
     Paciente(string dni, string nombreCompleto, string fechaNacimiento, int telefono, string sexo, string direccion);
 
-    void mostrar_historial_medico();
-
     inline string getNombreCompleto() const{
         return nombreCompleto_;
     }
@@ -76,8 +74,6 @@ public:
     inline void setTratamiento(Tratamiento tratamiento){
 
     }
-
-    bool addCita(Cita cita);
     
     /*inline void finalizarTratamiento(){
         tratamiento_ = NULL;

@@ -13,12 +13,8 @@ Paciente::Paciente(string dni, string nombreCompleto, string fechaNacimiento, in
     direccion_ = direccion;
 }
 
-void Paciente::mostrar_historial_medico(){
-
-}
-
 Cita Paciente::getUltimaCita(){
-        GestorFichero f;
-        Cita c = f.getUltimaCitaPaciente(dni_);
-        return c;
-    }
+    GestorFichero f;
+    Cita c = f.getUltimaCitaPaciente(dni_);
+    return c;
+}

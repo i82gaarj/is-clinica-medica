@@ -10,6 +10,10 @@ private:
     string observaciones_;
 
 public:
+    ElementoHistorial(string fecha, string observaciones){
+
+    }
+
     inline string getFecha(){
         return fecha_;
     }

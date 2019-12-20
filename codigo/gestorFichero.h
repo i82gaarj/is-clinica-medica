@@ -30,7 +30,7 @@ public:
 
     Paciente getPacienteFromDNI(string DNI);
 
-    void anadirCitaPaciente(Paciente p);
+    void anadirCitaPaciente(string DNI, Cita c);
 
     void anadirTratamientoPaciente(Paciente p);
 
@@ -38,7 +38,7 @@ public:
 
     Tratamiento getTratamientoPaciente(Paciente p);
 
-    list <ElementoHistorial> getHistorialPaciente(Paciente p);
+    list <ElementoHistorial> getHistorialPaciente(string DNI);
 
     bool buscarPaciente(string nombreCompleto);
 
@@ -52,6 +52,7 @@ public:
 
     bool eliminarCita(Paciente p, Cita c);
 
+    void anadirHistorialPaciente(string DNI, ElementoHistorial h);
 };
 
 #endif
