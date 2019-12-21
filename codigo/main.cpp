@@ -253,11 +253,14 @@ int main() {
 				cout << "Citas de hoy" << endl;
 				GestorFichero f;
 				list <Cita> citas = f.getCitasHoy();
+				cout << "Hoy tiene las siguientes citas: " << endl;
 				for(list <Cita>::iterator it = citas.begin(); it != citas.end(); it++){
-					cout << it -> getFecha() << endl
-						 << it -> getHora() << endl
-						 << it -> getDuracion() << endl;
+					cout << "Hora: " << it -> getHora() << endl
+						 << "Duración: " << it -> getDuracion() << " minutos" << endl;
 				}
+				cout << "Pulse ENTER para continuar...";
+				cin.ignore();
+				cin.get();
 			}break;
 
 			case 7:{

@@ -48,7 +48,6 @@ list <Cita> GestorFichero::getCitasHoy(){
 
 	list <Cita> todas = getTodasCitas();
 	for(Cita &c : todas){
-		cout << c.getFecha();
 		if (c.getFecha() == hoy){
 			citas.push_back(c);
 		}
