@@ -28,7 +28,7 @@ public:
 
     void anadirPaciente(Paciente p);
     
-    void modificarPaciente(Paciente p);
+    void modificarPaciente(Paciente p_nuevo, string DNI);
 
     Paciente getPacienteFromDNI(string DNI);
 
@@ -46,7 +46,7 @@ public:
 
     void modificarCitaPaciente(Paciente p);
 
-    Cita getUltimaCitaPaciente(string DNI);
+    list <Cita> getCitasPaciente(string DNI);
 
     bool eliminarPaciente(string DNI);
 
@@ -55,6 +55,8 @@ public:
     void anadirHistorialPaciente(string DNI, ElementoHistorial h);
 
     list <Cita> getTodasCitas();
+
+    Cita getUltimaCitaPaciente(string DNI);
 };
 
 #endif

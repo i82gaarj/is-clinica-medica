@@ -154,6 +154,7 @@ int main() {
 
 						}break;
 					}
+					f.modificarPaciente(aux, DNI);
 				}
 
 			}break;

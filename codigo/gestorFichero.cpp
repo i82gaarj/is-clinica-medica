@@ -40,7 +40,20 @@ list <Paciente> GestorFichero::getTodosPacientes(){
 }
 
 list <Cita> GestorFichero::getCitasHoy(){
+	list <Cita> citas;
 
+	time_t t = time(0);
+	tm* now = localtime(&t);
+	string hoy = to_string(now -> tm_mday) + "/" + to_string(now -> tm_mon  + 1) + "/" + to_string(now -> tm_year + 1900);
+
+	list <Cita> todas = getTodasCitas();
+	for(Cita &c : todas){
+		cout << c.getFecha();
+		if (c.getFecha() == hoy){
+			citas.push_back(c);
+		}
+	}
+	return citas;
 }
 
 void GestorFichero::anadirPaciente(Paciente p){
@@ -138,7 +151,21 @@ bool GestorFichero::eliminarPaciente(string DNI){
 		ifstream file(nombreFichero_.c_str());
 		if (file){
 			ofstream file_aux("pacientes_temp.txt");
-			while(!file.eof()){
+			int countLines = 0;
+			string line;
+			while(getline(file, line)){
+				if (line == DNI){
+					for (int i = 0; i < 5; i++) {
+						file.ignore(std::numeric_limits<streamsize>::max(), '\n');
+					}
+				}
+				else{
+					countLines++;
+				}
+			}
+			file.clear();
+			file.seekg(0, ios_base::beg);
+			for(int i = 0; i < countLines; i++){
 				string aux;
 				getline(file, aux);
 				if (aux == DNI){
@@ -146,8 +173,11 @@ bool GestorFichero::eliminarPaciente(string DNI){
 						file.ignore(std::numeric_limits<streamsize>::max(), '\n');
 					}
 				}
+				else if (i == countLines){
+					file_aux << aux;					
+				}
 				else{
-					file_aux << aux << endl;					
+					file_aux << aux << endl;	
 				}
 			}
 			remove("pacientes.txt");
@@ -204,8 +234,37 @@ void GestorFichero::anadirHistorialPaciente(string DNI, ElementoHistorial h){
 
 }
 
-void GestorFichero::modificarPaciente(Paciente p){
-
+void GestorFichero::modificarPaciente(Paciente p_nuevo, string DNI){
+	// Eliminamos paciente sin borrar su historial
+	ifstream file(nombreFichero_.c_str());
+	if (file){
+		ofstream file_aux("pacientes_temp.txt");
+		while(!file.eof()){
+			string aux;
+			getline(file, aux);
+			if (aux == DNI){
+				for (int i = 0; i < 5; i++) {
+					file.ignore(std::numeric_limits<streamsize>::max(), '\n');
+				}
+			}
+			else{
+				file_aux << aux << endl;					
+			}
+		}
+		remove("pacientes.txt");
+		rename("pacientes_temp.txt", "pacientes.txt");
+	}
+	
+	// Añade paciente modificado sin borrar su historial, citas...
+	fstream file2;
+	file2.open(nombreFichero_.c_str(), ios::out | ios::app);
+	file2 << p_nuevo.getDNI() << endl
+		  << p_nuevo.getNombreCompleto() << endl
+		  << p_nuevo.getFechaNacimiento() << endl
+		  << p_nuevo.getTelefono() << endl
+		  << p_nuevo.getSexo() << endl
+		  << p_nuevo.getDireccion() << endl;
+	file2.close();
 }
 
 list <Cita> GestorFichero::getTodasCitas(){
@@ -224,11 +283,28 @@ list <Cita> GestorFichero::getTodasCitas(){
 				file.ignore(std::numeric_limits<streamsize>::max(), '\n');
 			}
 
-			Cita c = getUltimaCitaPaciente(dni);
-			citas.push_back(c);
+			list<Cita> citas_paciente = getCitasPaciente(dni);
+			citas.insert(citas.end(), citas_paciente.begin(), citas_paciente.end());
 		}
 		file.close();
 	}
 
+	return citas;
+}
+
+list <Cita> GestorFichero::getCitasPaciente(string DNI){
+	list <Cita> citas;
+	ifstream file((DNI + "_citas.txt").c_str());
+
+	if (file){
+		string fecha, hora, duracion;
+		while(!file.eof()){
+			getline(file, fecha);
+			getline(file, hora);
+			getline(file, duracion);
+			Cita c(fecha, hora, atoi(duracion.c_str()));
+			citas.push_back(c);
+		}
+	}
 	return citas;
 }
