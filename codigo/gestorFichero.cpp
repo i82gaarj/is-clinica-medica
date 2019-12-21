@@ -204,30 +204,25 @@ bool GestorFichero::eliminarCita(Paciente p, Cita c){
 
 }
 
-Cita GestorFichero::getUltimaCitaPaciente(string DNI){
+list <Cita> GestorFichero::getProximasCitasPaciente(string DNI){
 	string name = DNI + "_citas.txt";
 	setNombreFichero(name);
 	
-	ifstream file(nombreFichero_.c_str());
+	list <Cita> citas_paciente = getCitasPaciente(DNI);
+	list <Cita> proximas_citas_paciente;
 
-	if (file){
-		string line, buffer[3];
-		const size_t size = sizeof buffer / sizeof *buffer;
-		size_t i = 0;
-		while (getline(file, line)){
-			buffer[i] = line;
-			if ( ++i >= size ){
-				i = 0;
-			}
+	time_t t = time(0);
+	tm* now = localtime(&t);
+
+	for(Cita &c : citas_paciente){
+		tm* fechaCita;
+		strptime(c.getFecha().c_str(), "%Y/%m/%d", fechaCita);
+		mktime(fechaCita);
+		if (fechaCita > now){
+			proximas_citas_paciente.push_back(c);
 		}
-
-		string fecha, hora, duracion;
-		fecha = buffer[0];
-		hora = buffer[1];
-		duracion = buffer[2];
-		Cita c(fecha, hora, atoi(duracion.c_str()));
-		return c;
 	}
+	return proximas_citas_paciente;
 }
 
 void GestorFichero::anadirHistorialPaciente(string DNI, ElementoHistorial h){
@@ -319,11 +314,10 @@ list <Cita> GestorFichero::getCitasPaciente(string DNI){
 
 	if (file){
 		string fecha, hora, duracion;
-		while(!file.eof()){
-			getline(file, fecha);
+		while(getline(file, fecha)){
 			getline(file, hora);
 			getline(file, duracion);
-			Cita c(fecha, hora, atoi(duracion.c_str()));
+			Cita c(fecha, hora, stoi(duracion));
 			citas.push_back(c);
 		}
 	}

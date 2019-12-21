@@ -27,4 +27,6 @@ void case_modificarPaciente();
 
 void case_anadirCita();
 
+void case_citasHoy();
+
 #endif

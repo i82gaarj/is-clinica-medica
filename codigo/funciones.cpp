@@ -1,6 +1,7 @@
 #include "funciones.h"
 #include "paciente.h"
 #include "gestorFichero.h"
+#include "cita.h"
 
 #include <string>
 #include <cctype>
@@ -50,6 +51,7 @@ bool validarDNI(string DNI){
     }
 }
 
+// Validación número de teléfono
 bool validarTelefono(string telefono){
     if (telefono.length() != 9){
         return false;
@@ -73,13 +75,12 @@ void mostrar_menu(){
 void mostrar_menu_paciente(Paciente p){
 	cout << endl << "SELECCIONE: " << endl 
 		 << "1. Mostrar el historial de " << p.getNombreCompleto() << endl
-		 << "2. Mostrar próxima cita de " << p.getNombreCompleto() << endl
+		 << "2. Mostrar citas de " << p.getNombreCompleto() << endl
 		 << "3. Cancelar cita asignada" << endl
 		 << "4. Modificar cita asignada" << endl
 		 << "5. Añadir historial médico a " << p.getNombreCompleto() << endl
 		 << "6. Asignar tratamiento a " << p.getNombreCompleto() << endl
-		 << "7. Finalizar tratamiento a " << p.getNombreCompleto() << endl
-		 << "8. Volver atrás" << endl;
+		 << "7. Volver atrás" << endl;
 }
 
 void mostrar_menu_modificar(){
@@ -260,4 +261,18 @@ void case_anadirCita(){
     else{
         cout << "El DNI introducido no se corresponde a ningun paciente" << endl;
     }
+}
+
+void case_citasHoy(){
+    cout << "Citas de hoy" << endl;
+    GestorFichero f;
+    list <Cita> citas = f.getCitasHoy();
+    cout << "Hoy tiene las siguientes citas: " << endl;
+    for(list <Cita>::iterator it = citas.begin(); it != citas.end(); it++){
+        cout << "Hora: " << it -> getHora() << endl
+                << "Duración: " << it -> getDuracion() << " minutos" << endl;
+    }
+    cout << "Pulse ENTER para continuar...";
+    cin.ignore();
+    cin.get();
 }

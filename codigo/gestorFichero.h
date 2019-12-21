@@ -58,7 +58,7 @@ public:
 
     list <Cita> getTodasCitas();
 
-    Cita getUltimaCitaPaciente(string DNI);
+    list <Cita> getProximasCitasPaciente(string DNI);
 };
 
 #endif

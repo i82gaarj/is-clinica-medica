@@ -17,25 +17,25 @@ int main() {
 		cin >> opcion;
 		switch(opcion) {
 
-			case 1:{
+			case 1:{ // Añadir paciente
 
 				case_anadirPaciente();
 
 			}break;
 
-			case 2:{
+			case 2:{ // Eliminar paciente
 
 				case_eliminarPaciente();
 
 			}break;
 
-			case 3:{
+			case 3:{ // Modificar paciente
 
 				case_modificarPaciente();
 
 			}break;
 
-			case 4:{
+			case 4:{ // Buscar paciente, incluye submenú
 				string DNI;
 				cout << "Introduzca dni: ";
 				cin >> DNI;
@@ -54,7 +54,7 @@ int main() {
 					mostrar_menu_paciente(aux);
 					cin >> opcion2;
 					switch(opcion2){
-						case 1:{ // mostrar historial
+						case 1:{ // Mostrar historial
 							list <ElementoHistorial> historial = f.getHistorialPaciente(DNI);
 							for(list <ElementoHistorial>::iterator it = historial.begin(); it != historial.end(); it++){
 								cout << it -> getFecha() << endl
@@ -65,37 +65,34 @@ int main() {
 						}break;
 
 						case 2:{
-							/*Cita c = aux.getUltimaCita();
-							cout << "PRÓXIMA CITA DE " << aux.getNombreCompleto() << ": " << endl
-								 << c.getFecha() << endl
-								 << c.getHora() << endl
-								 << "Duración: " << c.getDuracion() << endl;
+							list <Cita> citas = f.getProximasCitasPaciente(DNI);
+							cout << "PRÓXIMAS CITAS DE " << aux.getNombreCompleto() << ": " << endl;
+							for(Cita &c : citas){
+								cout << c.getFecha() << " a las " << c.getHora() << endl
+									 << "Duración: " << c.getDuracion() << " minutos" << endl;
+							}
 							cin.ignore();
-							cin.get();*/
+							cin.get();
 						}break;
 
-						case 3:{
-							// eliminar cita
-						}break;
-
-						case 4:{
-							// modificar cita
-						}break;
-
-						case 5:{
+						case 3:{ // Eliminar cita
 							
 						}break;
 
-						case 6:{
+						case 4:{ // Modificar cita
+							
+						}break;
+
+						case 5:{ // Añadir historial médico
+							
+						}break;
+
+						case 6:{ // Iniciar tratamiento
 
 						}break;
 
-						case 7:{
+						case 7:{ // Volver atrás
 
-						}break;
-
-						case 8:{
-							break;
 						}break;
 
 						default:{
@@ -112,28 +109,22 @@ int main() {
 				}
 			}break;
 
-			case 5:{
+			case 5:{ // Añadir una cita a un paciente
 				
 				case_anadirCita();
 
 			}break;
 
-			case 6:{
-				cout << "Citas de hoy" << endl;
-				GestorFichero f;
-				list <Cita> citas = f.getCitasHoy();
-				cout << "Hoy tiene las siguientes citas: " << endl;
-				for(list <Cita>::iterator it = citas.begin(); it != citas.end(); it++){
-					cout << "Hora: " << it -> getHora() << endl
-						 << "Duración: " << it -> getDuracion() << " minutos" << endl;
-				}
-				cout << "Pulse ENTER para continuar...";
-				cin.ignore();
-				cin.get();
+			case 6:{ // Mostrar las citas de hoy
+				
+				case_citasHoy();
+				
 			}break;
 
 			case 7:{
+
 				return 0;
+
 			}break;
 			
 			default:{
