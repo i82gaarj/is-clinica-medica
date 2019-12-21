@@ -3,6 +3,8 @@
 #include <string>
 #include <cstdlib>
 #include <fstream>
+#include <iostream>
+#include <limits>
 
 #include "cita.h"
 #include "paciente.h"
@@ -20,10 +22,6 @@ list <Paciente> GestorFichero::getTodosPacientes(){
 	ifstream file(nombreFichero_.c_str());
 	if (file){
 		while(!file.eof()){
-			if (file.peek() == ifstream::traits_type::eof()){
-				break;
-			}
-
 			string dni, nombreCompleto, telefono, direccion, sexo, fechaNacimiento;
 
 			getline(file, dni);
@@ -55,11 +53,11 @@ void GestorFichero::anadirPaciente(Paciente p){
 		 << p.getSexo() << endl
 		 << p.getDireccion() << endl;
 	file.close();
-	file.open(p.getDNI() + "_citas.txt", ios::out | ios::app);
+	file.open(p.getDNI() + "_citas.txt", ios::out);
 	file.close();
-	file.open(p.getDNI() + "_historial.txt", ios::out | ios::app);
+	file.open(p.getDNI() + "_historial.txt", ios::out);
 	file.close();
-	file.open(p.getDNI() + "_tratamientos.txt", ios::out | ios::app);
+	file.open(p.getDNI() + "_tratamientos.txt", ios::out);
 }
 
 Paciente GestorFichero::getPacienteFromDNI(string DNI){
@@ -82,14 +80,16 @@ Paciente GestorFichero::getPacienteFromDNI(string DNI){
 }
 
 void GestorFichero::anadirCitaPaciente(string DNI, Cita c){
-
+	nombreFichero_ = DNI + "_citas.txt";
+	ofstream file(nombreFichero_.c_str(), ios::app);
+	if (file){
+		file << c.getFecha() << endl
+			 << c.getHora() << endl
+			 << c.getDuracion() << endl;
+	}
 }
 
 void GestorFichero::anadirTratamientoPaciente(Paciente p){
-
-}
-
-list <Cita> GestorFichero::getCitasPaciente(Paciente p){
 
 }
 
@@ -134,7 +134,36 @@ void GestorFichero::modificarCitaPaciente(Paciente p){
 }
 
 bool GestorFichero::eliminarPaciente(string DNI){
-
+	if (buscarPaciente(DNI)){
+		ifstream file(nombreFichero_.c_str());
+		if (file){
+			ofstream file_aux("pacientes_temp.txt");
+			while(!file.eof()){
+				string aux;
+				getline(file, aux);
+				if (aux == DNI){
+					for (int i = 0; i < 5; i++) {
+						file.ignore(std::numeric_limits<streamsize>::max(), '\n');
+					}
+				}
+				else{
+					file_aux << aux << endl;					
+				}
+			}
+			remove("pacientes.txt");
+			rename("pacientes_temp.txt", "pacientes.txt");
+			remove((DNI + "_citas.txt").c_str());
+			remove((DNI + "_historial.txt").c_str());
+			remove((DNI + "_tratamientos.txt").c_str());
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	else{
+		return false;
+	}	
 }
 
 bool GestorFichero::eliminarCita(Paciente p, Cita c){
@@ -142,9 +171,64 @@ bool GestorFichero::eliminarCita(Paciente p, Cita c){
 }
 
 Cita GestorFichero::getUltimaCitaPaciente(string DNI){
+	string name = DNI + "_citas.txt";
+	setNombreFichero(name);
+	
+	ifstream file(nombreFichero_.c_str());
 
+	if (file){
+		string line, buffer[3];
+		const size_t size = sizeof buffer / sizeof *buffer;
+		size_t i = 0;
+		while (getline(file, line)){
+			buffer[i] = line;
+			if ( ++i >= size ){
+				i = 0;
+			}
+		}
+
+		string fecha, hora, duracion;
+		fecha = buffer[0];
+		hora = buffer[1];
+		duracion = buffer[2];
+		Cita c(fecha, hora, atoi(duracion.c_str()));
+		return c;
+	}
 }
 
 void GestorFichero::anadirHistorialPaciente(string DNI, ElementoHistorial h){
+	setNombreFichero(DNI + "_historial.txt");
+	ofstream file(nombreFichero_.c_str(), ios::app);
+	file << h.getFecha() << endl
+		 << h.getObservaciones() << endl;
 
+}
+
+void GestorFichero::modificarPaciente(Paciente p){
+
+}
+
+list <Cita> GestorFichero::getTodasCitas(){
+	list <Cita> citas;
+	ifstream file(nombreFichero_);
+	if (file) {
+		while (!file.eof()) {
+			if (file.peek() == ifstream::traits_type::eof()) {
+				break;
+			}
+
+			string dni;
+			getline(file, dni);
+
+			for (int i = 0; i < 5; i++) {
+				file.ignore(std::numeric_limits<streamsize>::max(), '\n');
+			}
+
+			Cita c = getUltimaCitaPaciente(dni);
+			citas.push_back(c);
+		}
+		file.close();
+	}
+
+	return citas;
 }

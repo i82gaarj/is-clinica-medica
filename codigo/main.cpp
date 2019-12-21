@@ -174,8 +174,8 @@ int main() {
 
 					int opcion2;
 					cout << endl << "SELECCIONE: " << endl 
-						 << "1. Mostrar el historial de" << aux.getNombreCompleto() << endl
-						 << "2. Mostrar citas de " << aux.getNombreCompleto() << endl
+						 << "1. Mostrar el historial de " << aux.getNombreCompleto() << endl
+						 << "2. Mostrar próxima cita de " << aux.getNombreCompleto() << endl
 						 << "3. Cancelar cita asignada" << endl
 						 << "4. Modificar cita asignada" << endl;
 					cin >> opcion2;
@@ -186,13 +186,17 @@ int main() {
 								cout << it -> getFecha() << endl
 									 << it -> getObservaciones() << endl;
 							}
+							cin.ignore();
+							cin.get();
 						}break;
 						case 2:{
 							Cita c = aux.getUltimaCita();
-							cout << "ÚLTIMA CITA DE " << aux.getNombreCompleto() << ": " << endl
+							cout << "PRÓXIMA CITA DE " << aux.getNombreCompleto() << ": " << endl
 								 << c.getFecha() << endl
 								 << c.getHora() << endl
 								 << "Duración: " << c.getDuracion() << endl;
+							cin.ignore();
+							cin.get();
 						}break;
 						case 3:{
 							// eliminar cita
@@ -223,10 +227,10 @@ int main() {
 				GestorFichero f;
 				
 				if(f.buscarPaciente(DNI) == true){
-					string fecha, hora;
-					int duracion;
+					string fecha, hora, duracion;
+					//int duracion;
 
-					cout << "Introduce la fecha: " << endl;
+					cout << "Introduce la fecha: (FORMATO DD/MM/AAAA)" << endl;
 					cin >> fecha;
 
 					cout << "Introduce la hora: (FORMATO HH:MM)" << endl;
@@ -235,7 +239,7 @@ int main() {
 					cout << "Introduce la duración en minutos" << endl;
 					cin >> duracion;
 
-					Cita c(fecha, hora, duracion);
+					Cita c(fecha, hora, atoi(duracion.c_str()));
 					f.anadirCitaPaciente(DNI, c);
 					
 				}
@@ -255,6 +259,10 @@ int main() {
 				}
 			}break;
 
+			case 7:{
+				return 0;
+			}break;
+			
 			default:{
 				cout << "Opcion no valida" << endl;
 			}break;

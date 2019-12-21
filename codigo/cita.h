@@ -11,7 +11,11 @@ private:
     int duracion_;
     
 public:
-    Cita(string fecha, string hora, int duracion);
+    Cita(string fecha, string hora, int duracion){
+        fecha_ = fecha;
+        hora_ = hora;
+        duracion_ = duracion;
+    }
 
     inline string getFecha() const{
         return fecha_;
@@ -37,9 +41,6 @@ public:
         duracion_ = duracion;
     }
 
-    string getFechaHoraDuracion() const; // devuelve info completa
-
-    string setFechaHoraDuracion(string fecha, string hora, int duracion); // función grande, comprobar si no solapa otra cita
 };
 
 #endif
