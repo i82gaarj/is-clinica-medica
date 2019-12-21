@@ -51,7 +51,7 @@ public:
         fechaNacimiento_ = fechaNacimiento;
     }
 
-    inline void setSexo(char sexo){
+    inline void setSexo(string sexo){
         sexo_ = sexo;
     }
 
@@ -78,8 +78,6 @@ public:
     /*inline void finalizarTratamiento(){
         tratamiento_ = NULL;
     }*/
-
-    Cita getUltimaCita();
 
 };
 

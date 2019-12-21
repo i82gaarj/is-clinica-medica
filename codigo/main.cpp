@@ -1,20 +1,11 @@
 #include <iostream>
 #include <string>
+
+#include "funciones.h"
 #include "paciente.h"
 #include "gestorFichero.h"
 
 using namespace std;
-
-void mostrar_menu(){
-	cout << "Seleccione una de las siguientes opciones: " << endl
-		 << "1. Añadir paciente." << endl
-		 << "2. Eliminar paciente." << endl
-		 << "3. Modificar paciente." << endl
-		 << "4. Buscar paciente." << endl
-		 << "5. Añadir cita." << endl
-		 << "6. Mostrar citas de hoy." << endl
-		 << "7. Salir" << endl;
-}
 
 int main() {
 
@@ -28,134 +19,19 @@ int main() {
 
 			case 1:{
 
-				string DNI;
-				string nombrec;
-				string fechn;
-				int num;
-				string sexo;
-				string direc;
+				case_anadirPaciente();
 
-				GestorFichero f;
-
-				cout << "Introduzca el DNI:" << endl;
-				cin >> DNI;
-				if (f.buscarPaciente(DNI)){
-					cout << "El paciente ya existe. Presione una tecla para continuar" << endl;
-					cin.ignore();
-					cin.get();
-					break;
-				}
-				cout << "Introduzca el nombre completo:" << endl;
-				cin.ignore();
-				getline(cin, nombrec);
-				cout << "Introduzca la fecha de nacimiento:" << endl;
-				cin >> fechn;
-				cout << "Introduzca el número de teléfono:" << endl;
-				cin >> num;
-				cout << "Introduzca el sexo:" << endl;
-				cin >> sexo;
-				cout << "Introduzca la dirección y localidad:" << endl;
-				cin.ignore();
-				getline(cin, direc);
-
-				Paciente p(DNI, nombrec, fechn, num, sexo, direc);
-				
-				f.anadirPaciente(p);
 			}break;
 
 			case 2:{
 
-				string DNI;
-
-				cout << "Introduzca el DNI del paciente que desea eliminar:" << endl;
-				cin >> DNI;
-
-				GestorFichero f("pacientes.txt");
-				f.eliminarPaciente(DNI);
+				case_eliminarPaciente();
 
 			}break;
 
 			case 3:{
 
-				string DNI;
-
-				cout << "Introduzca el DNI del paciente que desea modificar:" << endl;
-				cin >> DNI;
-
-				GestorFichero f;
-
-				if(f.buscarPaciente(DNI) == true){
-					Paciente aux = f.getPacienteFromDNI(DNI);
-
-					int opcion2;
-					string DNI2;
-					string nombrecm2;
-					string fechnm2;
-					int tlf2;
-					char sexo2;
-					string direc2;
-
-					cout << "Seleccione la opción que desea modificar:" << endl;
-					cout << "1. DNI." << endl;
-					cout << "2. Nombre completo." << endl;
-					cout << "3. Fecha de nacimiento." << endl;
-					cout << "4. Número de teléfono." << endl;
-					cout << "5. Sexo." << endl;
-					cout << "6. Dirección." << endl;
-
-					cin >> opcion2;
-
-					switch(opcion2) {
-						case 1:{
-
-							cout << "Introduzca el DNI modificado:" << endl;
-							cin >> DNI2;
-							aux.setDNI(DNI2);
-
-						}break;
-
-						case 2:{
-
-							cout << "Introduzca el nombre completo modificado:" << endl;
-							cin >> nombrecm2;
-							aux.setNombreCompleto(nombrecm2);
-
-						}break;
-
-						case 3:{
-
-							cout << "Introduzca la fecha de nacimiento modificada:" << endl;
-							cin >> fechnm2;
-							aux.setFechaNacimiento(fechnm2);								
-
-						}break;
-
-						case 4:{
-
-							cout << "Introduzca el número de teléfono modificado:" << endl;
-							cin >> tlf2;
-							aux.setTelefono(tlf2);
-
-						}break;
-
-						case 5:{
-
-							cout << "Introduzca el sexo modificado:" << endl;
-							cin >> sexo2;
-							aux.setSexo(sexo2);
-
-						}break;
-
-						case 6:{
-
-							cout << "Introduzca la dirección modificada modificada:" << endl;
-							cin >> direc2;
-							aux.setDireccion(direc2);
-
-						}break;
-					}
-					f.modificarPaciente(aux, DNI);
-				}
+				case_modificarPaciente();
 
 			}break;
 
@@ -163,6 +39,7 @@ int main() {
 				string DNI;
 				cout << "Introduzca dni: ";
 				cin >> DNI;
+				convertirDNIMayuscula(DNI);
 				GestorFichero f;
 				if (f.buscarPaciente(DNI) == true){
 					Paciente aux = f.getPacienteFromDNI(DNI);
@@ -174,11 +51,7 @@ int main() {
 						 << "Dirección: " << aux.getDireccion() << endl;
 
 					int opcion2;
-					cout << endl << "SELECCIONE: " << endl 
-						 << "1. Mostrar el historial de " << aux.getNombreCompleto() << endl
-						 << "2. Mostrar próxima cita de " << aux.getNombreCompleto() << endl
-						 << "3. Cancelar cita asignada" << endl
-						 << "4. Modificar cita asignada" << endl;
+					mostrar_menu_paciente(aux);
 					cin >> opcion2;
 					switch(opcion2){
 						case 1:{ // mostrar historial
@@ -190,26 +63,45 @@ int main() {
 							cin.ignore();
 							cin.get();
 						}break;
+
 						case 2:{
-							Cita c = aux.getUltimaCita();
+							/*Cita c = aux.getUltimaCita();
 							cout << "PRÓXIMA CITA DE " << aux.getNombreCompleto() << ": " << endl
 								 << c.getFecha() << endl
 								 << c.getHora() << endl
 								 << "Duración: " << c.getDuracion() << endl;
 							cin.ignore();
-							cin.get();
+							cin.get();*/
 						}break;
+
 						case 3:{
 							// eliminar cita
 						}break;
+
 						case 4:{
 							// modificar cita
-						}
+						}break;
+
 						case 5:{
+							
+						}break;
+
+						case 6:{
+
+						}break;
+
+						case 7:{
+
+						}break;
+
+						case 8:{
 							break;
-						}
+						}break;
+
 						default:{
-							cout << "Opcion no válida";
+							cout << "Opcion no válida. Presione ENTER para continuar...";
+							cin.ignore();
+							cin.get();
 						}break;
 					}
 				}
@@ -221,32 +113,9 @@ int main() {
 			}break;
 
 			case 5:{
-				cout << "Introduzca el DNI del paciente al que quiere añadir la cita" << endl;
-				string DNI;
-				cin >> DNI;
-
-				GestorFichero f;
 				
-				if(f.buscarPaciente(DNI) == true){
-					string fecha, hora, duracion;
-					//int duracion;
+				case_anadirCita();
 
-					cout << "Introduce la fecha: (FORMATO DD/MM/AAAA)" << endl;
-					cin >> fecha;
-
-					cout << "Introduce la hora: (FORMATO HH:MM)" << endl;
-					cin >> hora;
-
-					cout << "Introduce la duración en minutos" << endl;
-					cin >> duracion;
-
-					Cita c(fecha, hora, atoi(duracion.c_str()));
-					f.anadirCitaPaciente(DNI, c);
-					
-				}
-				else{
-					cout << "El DNI introducido no se corresponde a ningun paciente" << endl;
-				}
 			}break;
 
 			case 6:{

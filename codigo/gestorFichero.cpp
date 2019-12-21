@@ -70,6 +70,7 @@ void GestorFichero::anadirPaciente(Paciente p){
 	file.open(p.getDNI() + "_historial.txt", ios::out);
 	file.close();
 	file.open(p.getDNI() + "_tratamientos.txt", ios::out);
+	file.close();
 }
 
 Paciente GestorFichero::getPacienteFromDNI(string DNI){
@@ -125,16 +126,20 @@ list <ElementoHistorial> GestorFichero::getHistorialPaciente(string DNI){
 }
 
 bool GestorFichero::buscarPaciente(string DNI){
-	fstream file;
-	file.open(nombreFichero_.c_str(), ios::in);
-	string dni_buscar;
-	while(!file.eof()){
-		getline(file, dni_buscar);
-		if (DNI == dni_buscar){
-			return true;
+	ifstream file(nombreFichero_.c_str());
+	if (file){
+		string dni_buscar;
+		while(!file.eof()){
+			getline(file, dni_buscar);
+			if (DNI == dni_buscar){
+				return true;
+			}
 		}
+		return false;
 	}
-	return false;
+	else {
+		return false;
+	}
 }
 
 void GestorFichero::modificarTratamientoPaciente(Paciente p){
@@ -238,7 +243,21 @@ void GestorFichero::modificarPaciente(Paciente p_nuevo, string DNI){
 	ifstream file(nombreFichero_.c_str());
 	if (file){
 		ofstream file_aux("pacientes_temp.txt");
-		while(!file.eof()){
+		int countLines = 0;
+		string line;
+		while(getline(file, line)){
+			if (line == DNI){
+				for (int i = 0; i < 5; i++) {
+					file.ignore(std::numeric_limits<streamsize>::max(), '\n');
+				}
+			}
+			else{
+				countLines++;
+			}
+		}
+		file.clear();
+		file.seekg(0, ios_base::beg);
+		for(int i = 0; i < countLines; i++){
 			string aux;
 			getline(file, aux);
 			if (aux == DNI){
@@ -246,8 +265,11 @@ void GestorFichero::modificarPaciente(Paciente p_nuevo, string DNI){
 					file.ignore(std::numeric_limits<streamsize>::max(), '\n');
 				}
 			}
+			else if (i == countLines){
+				file_aux << aux;					
+			}
 			else{
-				file_aux << aux << endl;					
+				file_aux << aux << endl;	
 			}
 		}
 		remove("pacientes.txt");

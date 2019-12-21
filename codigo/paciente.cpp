@@ -12,9 +12,3 @@ Paciente::Paciente(string dni, string nombreCompleto, string fechaNacimiento, in
     sexo_ = sexo;
     direccion_ = direccion;
 }
-
-Cita Paciente::getUltimaCita(){
-    GestorFichero f;
-    Cita c = f.getUltimaCitaPaciente(dni_);
-    return c;
-}

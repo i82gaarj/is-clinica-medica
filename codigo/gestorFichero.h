@@ -1,7 +1,9 @@
 #ifndef GESTORFICHERO_H
 #define GESTORFICHERO_H
+
 #include <string>
 #include <list>
+
 #include "cita.h"
 #include "paciente.h"
 
