@@ -7,6 +7,16 @@
 
 using namespace std;
 
+bool validarFecha(const string &str);
+
+bool validarHora(const string &str);
+
+bool validarDuracion(const string &str);
+
+int strGetHora(const string &str);
+
+int strGetMinutos(const string &str);
+
 void convertirDNIMayuscula(string &dni);
 
 bool validarDNI(string DNI);

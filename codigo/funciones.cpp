@@ -132,10 +132,15 @@ void case_anadirPaciente(){
     cout << "Introduzca el nombre completo:" << endl;
     getline(cin, nombreCompleto);
 
-    cout << "Introduzca la fecha de nacimiento:" << endl;
+    cout << "Introduzca la fecha de nacimiento (FORMATO DD/MM/AAAA):" << endl;
     getline(cin, fechaNacimiento);
 
-    cout << "Introduzca el número de teléfono:" << endl;
+    while(!validarFecha(fechaNacimiento)){
+        cout << "Fecha no válida. Introdúzcala de nuevo" << endl;
+        getline(cin, fechaNacimiento);
+    }
+
+    cout << "Introduzca el número de teléfono, debe tener 9 dígitos:" << endl;
     getline(cin, telefono);
 
     while(!validarTelefono(telefono)){
@@ -164,11 +169,27 @@ void case_eliminarPaciente(){
     convertirDNIMayuscula(DNI);
     GestorFichero f("pacientes.txt");
     if (f.buscarPaciente(DNI)){
-        f.eliminarPaciente(DNI);
 
-        cout << "Paciente eliminado. Pulse ENTER para continuar..." << endl;
-        cin.ignore();
-        cin.get();
+        Paciente p = f.getPacienteFromDNI(DNI);
+        string confirmar;
+        cout << "¿Seguro que desea eliminar a " << p.getNombreCompleto() << "? [S|N]:" << endl;
+        cin >> confirmar;
+        while(confirmar != "S" && confirmar != "s" && confirmar != "N" && confirmar != "n"){
+            cout << "Por favor, introduca S o N" << endl;
+            cin >> confirmar;
+        }
+        if (confirmar == "S" || confirmar == "s"){
+            f.eliminarPaciente(DNI);
+            cout << "Paciente eliminado. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+        }
+        else if (confirmar == "N" || confirmar == "n"){
+            cout << "Operación cancelada. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+            return;
+        }
     }
     else{
         cout << "No existe el paciente con ese DNI" << endl;
@@ -193,7 +214,6 @@ void case_modificarPaciente(){
         mostrar_menu_modificar();
         int opcion_modificar;
         cin >> opcion_modificar;
-        cin.ignore();
         switch(opcion_modificar) {
             case 1:{
 
@@ -217,16 +237,25 @@ void case_modificarPaciente(){
             case 3:{
 
                 string fechaNacimiento_modificar;
-                cout << "Introduzca la fecha de nacimiento modificada:" << endl;
+                cout << "Introduzca la fecha de nacimiento modificada (FORMATO DD/MM/AAAA):" << endl;
                 getline(cin, fechaNacimiento_modificar);
-                aux.setFechaNacimiento(fechaNacimiento_modificar);								
+                if (validarFecha(fechaNacimiento_modificar)){
+                    aux.setTelefono(stoi(fechaNacimiento_modificar));
+                }
+                else{
+                    cout << "Nueva fecha de nacimiento no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+                    cin.ignore();
+                    cin.get();
+                    cin.clear();
+                    break;
+                }								
 
             }break;
 
             case 4:{
 
                 string telefono_modificar;
-                cout << "Introduzca el número de teléfono modificado:" << endl;
+                cout << "Introduzca el número de teléfono modificado, debe tener 9 dígitos:" << endl;
                 getline(cin, telefono_modificar);
                 if (validarTelefono(telefono_modificar)){
                     aux.setTelefono(stoi(telefono_modificar));
@@ -275,14 +304,32 @@ void case_anadirCita(){
     if(f.buscarPaciente(DNI) == true){
         string fecha, hora, duracion;
 
-        cout << "Introduce la fecha: (FORMATO DD/MM/AAAA)" << endl;
+        cout << "Introduce la fecha: (FORMATO DD/MM/AAAA):" << endl;
         cin >> fecha;
+        if (!validarFecha(fecha)){
+            cout << "Fecha no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+            return;
+        }
 
-        cout << "Introduce la hora: (FORMATO HH:MM)" << endl;
+        cout << "Introduce la hora (FORMATO HH:MM):" << endl;
         cin >> hora;
+        if (!validarHora(hora)){
+            cout << "Hora no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+            return;
+        }
 
         cout << "Introduce la duración en minutos" << endl;
         cin >> duracion;
+        if (!validarDuracion(duracion)){
+            cout << "Duracion no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+            return;
+        }
 
         Cita c(fecha, hora, atoi(duracion.c_str()));
         f.anadirCitaPaciente(DNI, c);
@@ -326,7 +373,7 @@ void case_citasHoy(){
 
 void case_buscarPaciente(){
     string DNI;
-    cout << "Introduzca dni: ";
+    cout << "Introduzca DNI: ";
     cin >> DNI;
     convertirDNIMayuscula(DNI);
     GestorFichero f;
@@ -498,7 +545,25 @@ void case_submenu_eliminarCita(Paciente p){
         string hora;
         cin >> hora;
         if (f.buscarCita(fecha, hora, p.getDNI())){
-            f.eliminarCita(p.getDNI(), fecha, hora);
+            string confirmar;
+            cout << "¿Seguro que desea eliminar la cita de " << p.getNombreCompleto() << " el día " << fecha << " a las " << hora << "? [S|N]:" << endl;
+            cin >> confirmar;
+            while(confirmar != "S" && confirmar != "s" && confirmar != "N" && confirmar != "n"){
+                cout << "Por favor, introduca S o N" << endl;
+                cin >> confirmar;
+            }
+            if (confirmar == "S" || confirmar == "s"){
+                f.eliminarCita(p.getDNI(), fecha, hora);
+                cout << "Cita eliminada. Pulse ENTER para continuar..." << endl;
+                cin.ignore();
+                cin.get();
+            }
+            else if (confirmar == "N" || confirmar == "n"){
+                cout << "Operación cancelada. Pulse ENTER para continuar..." << endl;
+                cin.ignore();
+                cin.get();
+                return;
+            }
         }
         else{
             cout << "La cita indicada no existe." << endl;
@@ -536,14 +601,32 @@ void case_submenu_modificarCita(Paciente p){
             cout << "Introduzca fecha nueva:" << endl;
             string fecha_n;
             cin >> fecha_n;
+            if(!validarFecha(fecha_n)){
+                cout << "Fecha no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+                cin.ignore();
+                cin.get();
+                return;
+            }
 
             cout << "Introduzca hora nueva:" << endl;
             string hora_n;
             cin >> hora_n;
+            if(!validarFecha(fecha_n)){
+                cout << "Hora no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+                cin.ignore();
+                cin.get();
+                return;
+            }
 
             cout << "Introduzca duración nueva: " << endl;
             string duracion_n;
             cin >> duracion_n;
+            if(!validarDuracion(duracion_n)){
+                cout << "Duración no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+                cin.ignore();
+                cin.get();
+                return;
+            }
 
             Cita citaNueva(fecha_n, hora_n, stoi(duracion_n));
 
@@ -599,10 +682,22 @@ void case_submenu_anadirTratamiento(Paciente p){
     }
 
     cout << "Introduce fecha de inicio (DD/MM/AAAA):" << endl;
-    cin >> fecha_inicio; 
+    cin >> fecha_inicio;
+    if (!validarFecha(fecha_inicio)){
+        cout << "Fecha no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+        return;
+    } 
 
     cout << "Introduce fecha de fin (DD/MM/AAAA):" << endl;
     cin >> fecha_fin;
+    if (!validarFecha(fecha_fin)){
+        cout << "Fecha no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+        return;
+    } 
 
     cout << "Introduce alguna descripción u observaciones:" << endl;
     getline(cin, observaciones);
@@ -624,6 +719,7 @@ void case_submenu_eliminarTratamiento(Paciente p){
         cin.ignore();
         cin.get();
         cin.clear();
+        return;
     }
     cout << "Lista de tratamientos: " << endl;
     for(Tratamiento &t : tratamientos){
@@ -634,7 +730,32 @@ void case_submenu_eliminarTratamiento(Paciente p){
     cout << "Introduzca el nombre del tratamiento que desea eliminar:" << endl;
     getline(cin, medicamento);
 
-    f.eliminarTratamiento(p.getDNI(), medicamento);
+    if (f.buscarTratamiento(p.getDNI(), medicamento)){
+        string confirmar;
+        cout << "¿Seguro que desea eliminar el tratamiento " << medicamento << " de " << p.getNombreCompleto() << "? [S|N]:" << endl;
+        cin >> confirmar;
+        while(confirmar != "S" && confirmar != "s" && confirmar != "N" && confirmar != "n"){
+            cout << "Por favor, introduca S o N" << endl;
+            cin >> confirmar;
+        }
+        if (confirmar == "S" || confirmar == "s"){
+            f.eliminarTratamiento(p.getDNI(), medicamento);
+            cout << "Tratamiento eliminado. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+        }
+        else if (confirmar == "N" || confirmar == "n"){
+            cout << "Operación cancelada. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+            return;
+        }
+    }
+    else{
+        cout << "El tratamiento indicado no existe. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+    }
 }
 
 void case_submenu_mostrarTratamientos(Paciente p){
@@ -645,6 +766,7 @@ void case_submenu_mostrarTratamientos(Paciente p){
         cin.ignore();
         cin.get();
         cin.clear();
+        return;
     }
     cout << "Lista de tratamientos: " << endl;
     for(Tratamiento &t : tratamientos){
@@ -699,5 +821,115 @@ void case_submenu_modificarTratamiento(Paciente p){
         cout << "El tratamiento indicado no existe. Pulse una tecla para continuar..." << endl;
         cin.ignore();
         cin.get();
+    }
+}
+
+//Extrae la hora de una string con formato HH:MM
+int strGetHora (const std::string &str) {
+    std::string hora = str.substr(0, 2);
+    return std::stoi(hora);
+}
+
+//Extrae los minutos de una string con formato HH:MM
+int strGetMinutos (const std::string &str) {
+    std::string minuto = str.substr(3, 2);
+    return std::stoi(minuto);
+}
+
+bool validarFecha (const string &str) {
+    if (str.size() == 10) {
+        //Comprueba el formato
+        for (int i = 0; i < 10; i++) {
+            if (i == 2 || i == 5) {
+                if (str[i] != '/') {
+                    return false;
+                }
+            }
+            else {
+                if (!isdigit(str[i])) {
+                    return false;
+                }
+            }
+        }
+
+        //Comprueba el mes
+        int m = std::stoi(str.substr(3, 2));
+        if (m < 1 || m > 12) {
+            return false;
+        }
+
+        //Comprueba el dia en funcion del mes
+        int d = std::stoi(str.substr(0, 2));
+        if (d < 1) { return false; }
+
+        switch (m) {
+            case  1: return d <= 31;
+            case  2: return d <= 28;
+            case  3: return d <= 31;
+            case  4: return d <= 30;
+            case  5: return d <= 31;
+            case  6: return d <= 30;
+            case  7: return d <= 31;
+            case  8: return d <= 31;
+            case  9: return d <= 30;
+            case 10: return d <= 31;
+            case 11: return d <= 30;
+            case 12: return d <= 31;
+        }
+    }
+    else {
+        return false;
+    }
+
+    return true;
+}
+
+//Comprueba que la hora este en el formato HH:MM y sea valida
+bool validarHora (const std::string &str) {
+    if (str.size() == 5) {
+        //Comprueba el formato
+        for (int i = 0; i < 5; i++) {
+            if (i == 2) {
+                if (str[i] != ':') {
+                    return false;
+                }
+            }
+            else {
+                if (!std::isdigit(str[i])) {
+                    return false;
+                }
+            }
+        }
+
+        //Comprueba que la hora sea valida
+        int h = strGetHora(str);
+        if (h < 0 || h > 23) {
+            return false;
+        }
+
+        //Comprueba que los minutos sean validos
+        int m = strGetMinutos(str);
+        if (m < 0 || m > 59) {
+            return false;
+        }
+    }
+    else {
+        return false;        
+    }
+
+    return true;
+}
+
+bool validarDuracion(const string &duracion){
+    for (int i = 0; i < duracion.size(); i++){
+        if (!isdigit(duracion[i])){
+            return false;
+        }
+    }
+    if (stoi(duracion) <= 0){
+        return false;
+    }
+    else{
+        return true;
     }
 }
