@@ -36,9 +36,9 @@ public:
 
     void anadirCitaPaciente(string DNI, Cita c);
 
-    void anadirTratamientoPaciente(Paciente p);
+    void anadirTratamientoPaciente(string DNI, Tratamiento t);
 
-    Tratamiento getTratamientoPaciente(Paciente p);
+    list <Tratamiento> getTratamientosPaciente(string DNI);
 
     list <ElementoHistorial> getHistorialPaciente(string DNI);
 
@@ -46,19 +46,24 @@ public:
 
     void modificarTratamientoPaciente(Paciente p);
 
-    void modificarCitaPaciente(Paciente p);
+    void modificarCitaPaciente(string DNI, string fecha_antigua, string hora_antigua, Cita citaNueva);
 
+    bool buscarCita(string fecha, string hora);
+
+    bool buscarCita(string fecha, string hora, string DNI);
+    
     list <Cita> getCitasPaciente(string DNI);
 
     bool eliminarPaciente(string DNI);
 
-    bool eliminarCita(Paciente p, Cita c);
+    bool eliminarCita(string DNI, string fecha, string hora);
 
     void anadirHistorialPaciente(string DNI, ElementoHistorial h);
 
     list <Cita> getTodasCitas();
 
     list <Cita> getProximasCitasPaciente(string DNI);
+
 };
 
 #endif

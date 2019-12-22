@@ -29,4 +29,8 @@ void case_anadirCita();
 
 void case_citasHoy();
 
+void case_buscarPaciente();
+
+void case_mostrarListaPacientes();
+
 #endif

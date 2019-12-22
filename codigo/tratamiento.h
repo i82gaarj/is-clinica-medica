@@ -9,9 +9,10 @@ private:
     string medicamento_;
     string fechaComienzo_;
     string fechaFin_;
+    string observaciones_;
 
 public:
-    Tratamiento(string medicamento, string fechaComienzo, string fechaFin);
+    Tratamiento(string medicamento, string fechaComienzo, string fechaFin, string observaciones);
 
     inline string getMedicamento(){
         return medicamento_;
@@ -23,6 +24,10 @@ public:
 
     inline string getFechaFin(){
         return fechaFin_;
+    }
+
+    inline string getObservaciones(){
+        return observaciones_;
     }
 
     inline void setMedicamento(string medicamento){
@@ -37,6 +42,9 @@ public:
         fechaFin_ = fecha;
     }
 
+    inline void setObservaciones(string observaciones){
+        observaciones_ = observaciones;
+    }
 };
 
 #endif

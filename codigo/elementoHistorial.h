@@ -11,7 +11,8 @@ private:
 
 public:
     ElementoHistorial(string fecha, string observaciones){
-
+        fecha_ = fecha;
+        observaciones_ = observaciones;
     }
 
     inline string getFecha(){
