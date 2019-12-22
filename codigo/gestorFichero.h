@@ -44,8 +44,6 @@ public:
 
     bool buscarPaciente(string nombreCompleto);
 
-    void modificarTratamientoPaciente(Paciente p);
-
     void modificarCitaPaciente(string DNI, string fecha_antigua, string hora_antigua, Cita citaNueva);
 
     bool buscarCita(string fecha, string hora);
@@ -63,6 +61,12 @@ public:
     list <Cita> getTodasCitas();
 
     list <Cita> getProximasCitasPaciente(string DNI);
+
+    void eliminarTratamiento(string DNI, string medicamento);
+
+    void modificarTratamiento(string DNI, string medicamento, Tratamiento nuevo);
+
+    bool buscarTratamiento(string DNI, string medicamento);
 
 };
 

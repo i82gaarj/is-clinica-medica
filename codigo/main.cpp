@@ -52,22 +52,23 @@ int main() {
 				
 			}break;
 
-			case 7:{
-
-				return 0;
-
-			}break;
-			
-			case 8:{ // Mostrar lista de pacientes
+			case 7:{ // Mostrar lista de pacientes
 
 				case_mostrarListaPacientes();
 
-			}
+			}break;
+
+			case 8:{ // Salir
+
+				break;
+
+			}break;
+
 			default:{
 
-				cout << "Opcion no valida" << endl;
+				cout << "Opción no valida" << endl;
 
 			}break;
 		}
-	}while(opcion != 7);
+	}while(opcion != 8);
 }

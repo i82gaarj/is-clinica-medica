@@ -165,10 +165,6 @@ bool GestorFichero::buscarPaciente(string DNI){
 	}
 }
 
-void GestorFichero::modificarTratamientoPaciente(Paciente p){
-
-}
-
 void GestorFichero::modificarCitaPaciente(string DNI, string fecha_antigua, string hora_antigua, Cita citaNueva){
 	eliminarCita(DNI, fecha_antigua, hora_antigua);
 	anadirCitaPaciente(DNI, citaNueva);
@@ -407,4 +403,65 @@ bool GestorFichero::buscarCita(string fecha, string hora, string DNI){
 		}
 	}
 	return false;
+}
+
+void GestorFichero::eliminarTratamiento(string DNI, string medicamento){
+	nombreFichero_ = DNI + "_tratamientos.txt";
+	ifstream file(nombreFichero_.c_str());
+	if (file){
+		ofstream file_aux("tratamientos_temp.txt");
+		int countLines = 0;
+		string line;
+		while(getline(file, line)){
+			if (line == medicamento){
+				for (int i = 0; i < 4; i++){
+					file.ignore(std::numeric_limits<streamsize>::max(), '\n');
+				}
+			}
+			else{
+				countLines++;
+			}
+		}
+		file.clear();
+		file.seekg(0, ios_base::beg);
+		for(int i = 0; i < countLines; i++){
+			getline(file, line);
+			if (line == medicamento){
+				for (int i = 0; i < 3; i++){
+					file.ignore(std::numeric_limits<streamsize>::max(), '\n');
+				}
+			}
+			else if (i == countLines){
+				file_aux << line;					
+			}
+			else{
+				file_aux << line << endl;	
+			}
+		}
+		file.close();
+		file_aux.close();
+		remove(nombreFichero_.c_str());
+		rename("tratamientos_temp.txt", nombreFichero_.c_str());
+	}
+}
+
+void GestorFichero::modificarTratamiento(string DNI, string medicamento, Tratamiento nuevo){
+	eliminarTratamiento(DNI, medicamento);
+	anadirTratamientoPaciente(DNI, nuevo);
+}
+
+bool GestorFichero::buscarTratamiento(string DNI, string medicamento){
+	nombreFichero_ = DNI + "_tratamientos.txt";
+	ifstream file(nombreFichero_.c_str());
+	if (file){
+		string aux;
+		while(getline(file, aux)){
+			if (aux == medicamento){
+				file.close();
+				return true;
+			}
+		}
+		file.close();
+		return false;
+	}
 }

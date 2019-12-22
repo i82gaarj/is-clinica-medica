@@ -70,11 +70,17 @@ void mostrar_menu(){
 		 << "4. Buscar paciente (submenu)." << endl
 		 << "5. Añadir cita." << endl
 		 << "6. Mostrar citas de hoy." << endl
-		 << "7. Salir" << endl
-         << "8. Mostrar una lista de todos los pacientes" << endl;
+		 << "7. Mostrar una lista de todos los pacientes" << endl
+         << "8. Salir" << endl;
 }
 
 void mostrar_menu_paciente(Paciente p){
+    cout << "DNI " << p.getDNI() << endl
+         << "Nombre: " << p.getNombreCompleto() << endl
+         << "Sexo: " << p.getSexo() << endl
+         << "Fecha Nacimiento: " << p.getFechaNacimiento() << endl
+         << "Teléfono: " << p.getTelefono() << endl
+         << "Dirección: " << p.getDireccion() << endl;
 	cout << endl << "SELECCIONE: " << endl 
 		 << "1. Mostrar el historial de " << p.getNombreCompleto() << endl
 		 << "2. Mostrar citas de " << p.getNombreCompleto() << endl
@@ -82,8 +88,10 @@ void mostrar_menu_paciente(Paciente p){
 		 << "4. Modificar cita asignada" << endl
 		 << "5. Añadir historial médico a " << p.getNombreCompleto() << endl
 		 << "6. Asignar tratamiento a " << p.getNombreCompleto() << endl
-		 << "7. Volver atrás" << endl
-         << "8. Mostrar tratamientos" << endl;
+		 << "7. Eliminar un tratamiento" << endl
+         << "8. Mostrar tratamientos" << endl
+         << "9. Modificar un tratamiento" << endl
+         << "10. Volver atrás" << endl;
 }
 
 void mostrar_menu_modificar(){
@@ -153,6 +161,7 @@ void case_eliminarPaciente(){
 
     cout << "Introduzca el DNI del paciente que desea eliminar:" << endl;
     cin >> DNI;
+    convertirDNIMayuscula(DNI);
     GestorFichero f("pacientes.txt");
     if (f.buscarPaciente(DNI)){
         f.eliminarPaciente(DNI);
@@ -323,12 +332,6 @@ void case_buscarPaciente(){
     GestorFichero f;
     if (f.buscarPaciente(DNI) == true){
         Paciente aux = f.getPacienteFromDNI(DNI);
-        cout << "DNI " << DNI << endl
-                << "Nombre: " << aux.getNombreCompleto() << endl
-                << "Sexo: " << aux.getSexo() << endl
-                << "Fecha Nacimiento: " << aux.getFechaNacimiento() << endl
-                << "Teléfono: " << aux.getTelefono() << endl
-                << "Dirección: " << aux.getDireccion() << endl;
 
         int opcion_submenu;
         do{
@@ -494,6 +497,12 @@ void case_buscarPaciente(){
                     cout << "Introduce nombre del medicamento/tratamiento:" << endl;
                     cin.ignore();
                     getline(cin, medicamento);
+                    if (f.buscarTratamiento(DNI, medicamento)){
+                        cout << "Este tratamiento para este paciente ya existe. Pulse ENTER para continuar..." << endl;
+                        cin.ignore();
+                        cin.get();
+                        break;
+                    }
 
                     cout << "Introduce fecha de inicio (DD/MM/AAAA):" << endl;
                     cin >> fecha_inicio; 
@@ -514,9 +523,26 @@ void case_buscarPaciente(){
 
                 }break;
 
-                case 7:{ // Volver atrás
+                case 7:{ // Eliminar tratamiento
                     
-                    break;
+                    GestorFichero f;
+                    list <Tratamiento> tratamientos = f.getTratamientosPaciente(DNI);
+                    if (tratamientos.size() == 0){
+                        cout << "No hay tratamientos. Pulse ENTER para continuar..." << endl;
+                        cin.ignore();
+                        cin.get();
+                        cin.clear();
+                    }
+                    cout << "Lista de tratamientos: " << endl;
+                    for(Tratamiento &t : tratamientos){
+                        cout << endl << "Medicamento/Tratamiento: " << t.getMedicamento() << endl;
+                    }
+
+                    string medicamento;
+                    cout << "Introduzca el nombre del tratamiento que desea eliminar:" << endl;
+                    getline(cin, medicamento);
+
+                    f.eliminarTratamiento(DNI, medicamento);
 
                 }break;
 
@@ -543,8 +569,15 @@ void case_buscarPaciente(){
 
                 }break;
 
-                case 9:{
-                    
+                case 9:{ // Modificar tratamiento
+
+                    string medicamento;
+                }
+
+                case 10:{ // Volver atrás
+
+                    break;
+
                 }
 
                 default:{
@@ -553,7 +586,7 @@ void case_buscarPaciente(){
                     cin.get();
                 }break;
             }
-        }while(opcion_submenu != 7);
+        }while(opcion_submenu != 10);
     }
     else{
         cout << "Paciente con DNI " << DNI << " no existe" << endl;
