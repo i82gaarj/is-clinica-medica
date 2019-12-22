@@ -332,6 +332,16 @@ void case_anadirCita(){
         }
 
         Cita c(fecha, hora, atoi(duracion.c_str()));
+
+        list<Cita> citas = f.getTodasCitas();
+        for (Cita &cita : citas) {
+            if (validarCita(c, cita)) {
+                cout << "Ya hay una cita a esa hora. Pulse ENTER para continuar...";
+                cin.ignore();
+                cin.get();
+                return;
+            }
+        }
         f.anadirCitaPaciente(DNI, c);
         
         cout << "Cita añadida. Pulse ENTER para continuar..." << endl;
@@ -475,7 +485,7 @@ void case_mostrarListaPacientes(){
     else{
         cout << "PACIENTES EN EL SISTEMA: " << endl;
         for(Paciente &p : pacientes){
-            cout << "DNI " << p.getDNI() << " - " << p.getNombreCompleto() << endl;
+            cout << "DNI " << p.getDNI() << " - " << p.getNombreCompleto() << " - " << p.getTelefono() << endl;
         }
 
         cout << "Pulse ENTER para continuar..." << endl;
@@ -589,8 +599,8 @@ void case_submenu_modificarCita(Paciente p){
                     << "Duración: " << c.getDuracion() << " minutos" << endl;
         }
 
-        cout << "Va a modificar una cita" << endl;
-        cout << "Introduzca fecha:" << endl;
+        cout << endl << "Va a modificar una cita" << endl;
+        cout << "Introduzca fecha de la cita que quiere modificar:" << endl;
         string fecha_a;
         cin >> fecha_a;
 
@@ -629,7 +639,17 @@ void case_submenu_modificarCita(Paciente p){
                 return;
             }
 
-            Cita citaNueva(fecha_n, hora_n, stoi(duracion_n));
+            Cita citaNueva(fecha_n, hora_n, atoi(duracion_n.c_str()));
+
+            list<Cita> citas = f.getTodasCitas();
+            for (Cita &cita : citas) {
+                if (validarCita(citaNueva, cita)) {
+                    cout << "Ya hay una cita a esa hora. Pulse ENTER para continuar...";
+                    cin.ignore();
+                    cin.get();
+                    return;
+                }
+            }
 
             f.modificarCitaPaciente(p.getDNI(), fecha_a, hora_a, citaNueva);
             cout << "Cita modificada. Pulse ENTER para continuar..." << endl;
@@ -843,16 +863,16 @@ void case_submenu_modificarTratamiento(Paciente p){
     }
 }
 
-//Extrae la hora de una string con formato HH:MM
-int strGetHora (const std::string &str) {
-    std::string hora = str.substr(0, 2);
-    return std::stoi(hora);
+// Obtiene la hora sin los minutos
+int strGetHora (const string &str) {
+    string hora = str.substr(0, 2);
+    return atoi(hora.c_str());
 }
 
-//Extrae los minutos de una string con formato HH:MM
-int strGetMinutos (const std::string &str) {
-    std::string minuto = str.substr(3, 2);
-    return std::stoi(minuto);
+// Obtiene los minutos de la hora
+int strGetMinutos (const string &str) {
+    string minuto = str.substr(3, 2);
+    return atoi(minuto.c_str());
 }
 
 bool validarFecha (const string &str) {
@@ -872,25 +892,25 @@ bool validarFecha (const string &str) {
         }
 
         //Comprueba el mes
-        int m = std::stoi(str.substr(3, 2));
+        int m = atoi(str.substr(3, 2).c_str());
         if (m < 1 || m > 12) {
             return false;
         }
 
         //Comprueba el dia en funcion del mes
-        int d = std::stoi(str.substr(0, 2));
+        int d = atoi(str.substr(0, 2).c_str());
         if (d < 1) { return false; }
 
         switch (m) {
-            case  1: return d <= 31;
-            case  2: return d <= 28;
-            case  3: return d <= 31;
-            case  4: return d <= 30;
-            case  5: return d <= 31;
-            case  6: return d <= 30;
-            case  7: return d <= 31;
-            case  8: return d <= 31;
-            case  9: return d <= 30;
+            case 1: return d <= 31;
+            case 2: return d <= 28;
+            case 3: return d <= 31;
+            case 4: return d <= 30;
+            case 5: return d <= 31;
+            case 6: return d <= 30;
+            case 7: return d <= 31;
+            case 8: return d <= 31;
+            case 9: return d <= 30;
             case 10: return d <= 31;
             case 11: return d <= 30;
             case 12: return d <= 31;
@@ -904,7 +924,7 @@ bool validarFecha (const string &str) {
 }
 
 //Comprueba que la hora este en el formato HH:MM y sea valida
-bool validarHora (const std::string &str) {
+bool validarHora (const string &str) {
     if (str.size() == 5) {
         //Comprueba el formato
         for (int i = 0; i < 5; i++) {
@@ -914,7 +934,7 @@ bool validarHora (const std::string &str) {
                 }
             }
             else {
-                if (!std::isdigit(str[i])) {
+                if (!isdigit(str[i])) {
                     return false;
                 }
             }
@@ -941,14 +961,62 @@ bool validarHora (const std::string &str) {
 
 bool validarDuracion(const string &duracion){
     for (int i = 0; i < duracion.size(); i++){
+        // Comprobar que ningun caracter es letra
         if (!isdigit(duracion[i])){
             return false;
         }
     }
-    if (stoi(duracion) <= 0){
+    // Comprobar que no sea negativo ni cero
+    if (atoi(duracion.c_str()) <= 0){
         return false;
     }
     else{
         return true;
     }
+}
+
+// Verifica si dos citas coinciden
+bool validarCita (const Cita &c1, const Cita &c2) {
+    bool coincide = true;
+
+    if (c1.getFecha() == c2.getFecha()) {
+        int hc1 = strGetHora(c1.getHora());
+        int mc1 = strGetMinutos(c1.getHora());
+
+        int hf1 = hc1;
+        int mf1 = mc1 + c1.getDuracion();
+        hf1 += mf1 / 60;
+        mf1 %= 60;
+
+        int hc2 = strGetHora(c2.getHora());
+        int mc2 = strGetMinutos(c2.getHora());
+
+        int hf2 = hc2;
+        int mf2 = mc2 + c2.getDuracion();
+        hf2 += mf2 / 60;
+        mf2 %= 60;
+
+        if (hf1 < hc2) {
+            coincide = false;
+        }
+        else if (hf1 == hc2) {
+            if (mf1 <= mc2) {
+                coincide = false;
+            }
+        }
+
+        if (hc1 > hf2) {
+            coincide = false;
+        }
+        else if (hc1 == hf2) {
+            if (mc1 >= mf2) {
+                coincide = false;
+            }
+        }
+    }
+    else {
+        coincide = false;
+    }
+
+    return coincide;
 }

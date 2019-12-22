@@ -43,6 +43,7 @@ list <Paciente> GestorFichero::getTodosPacientes(){
 list <Cita> GestorFichero::getCitasHoy(){
 	list <Cita> citas;
 
+	// Obtenemos la fecha de hoy
 	time_t t = time(0);
 	tm* now = localtime(&t);
 	string day = now->tm_mday < 10 ? "0" + now->tm_mday : std::to_string(now->tm_mday);
@@ -273,12 +274,13 @@ list <Cita> GestorFichero::getProximasCitasPaciente(string DNI){
 	list <Cita> citas_paciente = getCitasPaciente(DNI);
 	list <Cita> proximas_citas_paciente;
 
+	// Obtenemos fecha y hora actual
 	time_t t = time(0);
 
 	for(Cita &c : citas_paciente){
 		tm fechaCita;
-		strptime((c.getFecha() + " " + c.getHora()).c_str(), "%d/%m/%Y %H:%M", &fechaCita);
-		time_t fechaCita_ = mktime(&fechaCita);
+		strptime((c.getFecha() + " " + c.getHora()).c_str(), "%d/%m/%Y %H:%M", &fechaCita); // Convierte a "struct tm"
+		time_t fechaCita_ = mktime(&fechaCita); // Convierte a time_t
 		if ((difftime(fechaCita_, t)) > 0){ // Comparamos la fecha de hoy y de cada cita
 			proximas_citas_paciente.push_back(c);
 		}
@@ -378,7 +380,7 @@ list <Cita> GestorFichero::getCitasPaciente(string DNI){
 		while(getline(file, fecha)){
 			getline(file, hora);
 			getline(file, duracion);
-			Cita c(fecha, hora, stoi(duracion));
+			Cita c(fecha, hora, atoi(duracion.c_str()));
 			citas.push_back(c);
 		}
 	}

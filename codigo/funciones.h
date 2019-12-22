@@ -61,4 +61,6 @@ void case_submenu_mostrarTratamientos(Paciente p); // CASO DE USO 15
 
 void case_submenu_modificarTratamiento(Paciente p); // CASO DE USO 6
 
+bool validarCita(const Cita &c1, const Cita &c2);
+
 #endif
