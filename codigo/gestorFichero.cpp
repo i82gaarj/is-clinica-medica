@@ -414,7 +414,7 @@ void GestorFichero::eliminarTratamiento(string DNI, string medicamento){
 		string line;
 		while(getline(file, line)){
 			if (line == medicamento){
-				for (int i = 0; i < 4; i++){
+				for (int i = 0; i < 3; i++){
 					file.ignore(std::numeric_limits<streamsize>::max(), '\n');
 				}
 			}
@@ -424,18 +424,18 @@ void GestorFichero::eliminarTratamiento(string DNI, string medicamento){
 		}
 		file.clear();
 		file.seekg(0, ios_base::beg);
-		for(int i = 0; i < countLines; i++){
-			getline(file, line);
+		cout << "countlines: " << countLines << endl;
+		int i = 0;
+		while(getline(file, line)){
 			if (line == medicamento){
-				for (int i = 0; i < 3; i++){
+				for (int j = 0; j < 3; j++){
 					file.ignore(std::numeric_limits<streamsize>::max(), '\n');
 				}
 			}
-			else if (i == countLines){
-				file_aux << line;					
-			}
 			else{
-				file_aux << line << endl;	
+				cout << "he llegado a else" << endl;
+				file_aux << line << endl;
+				i++;
 			}
 		}
 		file.close();
