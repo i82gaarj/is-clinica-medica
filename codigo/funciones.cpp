@@ -341,237 +341,57 @@ void case_buscarPaciente(){
             cin.ignore();
             switch(opcion_submenu){
                 case 1:{ // Mostrar historial
-                    list <ElementoHistorial> historial = f.getHistorialPaciente(DNI);
-                    if (historial.size() == 0){
-                        cout << "El paciente " << aux.getNombreCompleto() << " no tiene historial médico" << endl;
-                        cout << "Pulse ENTER para continuar...";
-                        cin.ignore();
-                        cin.get();
-                        
-                    }
-                    else{
-                        cout << "Historial médico de " << aux.getNombreCompleto() << ": " << endl;
-                        for(list <ElementoHistorial>::iterator it = historial.begin(); it != historial.end(); it++){
-                            cout << it -> getFecha() << endl
-                                    << it -> getObservaciones() << endl;
-                        }
-                        cout << "Pulse ENTER para continuar..." << endl;
-                        cin.ignore();
-                        cin.get();
-                    }
+                    
+                    case_submenu_mostrarHistorial(aux);
                     
                 }break;
 
-                case 2:{
-                    list <Cita> citas = f.getProximasCitasPaciente(DNI);
-                    if (citas.size() == 0){
-                        cout << "No hay citas. Pulse ENTER para continuar..." << endl;
-                        cin.ignore();
-                        cin.get();
-                    }
-                    else{
-                        cout << "PRÓXIMAS CITAS DE " << aux.getNombreCompleto() << ": " << endl;
-                        for(Cita &c : citas){
-                            cout << c.getFecha() << " a las " << c.getHora() << endl
-                                    << "Duración: " << c.getDuracion() << " minutos" << endl;
-                        }
-                    }
-                    cin.ignore();
-                    cin.get();
+                case 2:{ // Mostrar citas
+                    
+                    case_submenu_mostrarCitas(aux);
+
                 }break;
 
                 case 3:{ // Eliminar cita
 
-                    list <Cita> citas = f.getProximasCitasPaciente(DNI);
-
-                    if (citas.size() != 0){
-                        cout << "PRÓXIMAS CITAS DE " << aux.getNombreCompleto() << ": " << endl;
-                        for(Cita &c : citas){
-                            cout << c.getFecha() << " a las " << c.getHora() << endl
-                                    << "Duración: " << c.getDuracion() << " minutos" << endl;
-                        }
-                        
-                        cout << "Introduzca fecha de la cita a eliminar:" << endl;
-                        string fecha;
-                        cin >> fecha;
-
-                        cout << "Introduzca hora:" << endl;
-                        string hora;
-                        cin >> hora;
-                        if (f.buscarCita(fecha, hora, DNI)){
-                            f.eliminarCita(DNI, fecha, hora);
-                        }
-                        else{
-                            cout << "La cita indicada no existe." << endl;
-                        }
-                        cout << "Cita eliminada. Pulse ENTER para continuar..." << endl;
-                        cin.ignore();
-                        cin.get();
-                    }
-                    else{
-                        cout << "No hay citas. Pulse ENTER para continuar" << endl;
-                        cin.ignore();
-                        cin.get();
-                    }
+                    case_submenu_eliminarCita(aux);
 
                 }break;
 
                 case 4:{ // Modificar cita
                     
-                    list <Cita> citas = f.getProximasCitasPaciente(DNI);
-                    if (citas.size() != 0){
-                        cout << "PRÓXIMAS CITAS DE " << aux.getNombreCompleto() << ": " << endl;
-                        for(Cita &c : citas){
-                            cout << c.getFecha() << " a las " << c.getHora() << endl
-                                    << "Duración: " << c.getDuracion() << " minutos" << endl;
-                        }
-
-                        cout << "Va a modificar una cita" << endl;
-                        cout << "Introduzca fecha:" << endl;
-                        string fecha_a;
-                        cin >> fecha_a;
-                        cout << "Introduzca hora:" << endl;
-                        string hora_a;
-                        cin >> hora_a;
-
-                        if (f.buscarCita(fecha_a, hora_a, DNI)){
-                            cout << "Introduzca fecha nueva:" << endl;
-                            string fecha_n;
-                            cin >> fecha_n;
-
-                            cout << "Introduzca hora nueva:" << endl;
-                            string hora_n;
-                            cin >> hora_n;
-
-                            cout << "Introduzca duración nueva: " << endl;
-                            string duracion_n;
-                            cin >> duracion_n;
-
-                            Cita citaNueva(fecha_n, hora_n, stoi(duracion_n));
-
-                            f.modificarCitaPaciente(DNI, fecha_a, hora_a, citaNueva);
-                            cout << "Cita modificada. Pulse ENTER para continuar..." << endl;
-                            cin.ignore();
-                            cin.get();
-                        }
-                        else{
-                            cout << "La cita indicada no existe. Pulse ENTER para continuar..." << endl;
-                            cin.ignore();
-                            cin.get();
-                        }
-                    }
-                    else{
-                        cout << "No hay citas. Pulse ENTER para continuar..." << endl;
-                        cin.ignore();
-                        cin.get();
-                    }
+                    case_submenu_modificarCita(aux);
                     
                 }break;
 
                 case 5:{ // Añadir historial médico
                     
-                    cout << "Introduzca la fecha:" << endl;
-                    string fecha;
-                    cin >> fecha;
-
-                    cout << "Introduzca observaciones:" << endl;
-                    string observaciones;
-                    cin.ignore();
-                    getline(cin, observaciones);
-                    ElementoHistorial h(fecha, observaciones);
-
-                    GestorFichero f;
-                    f.anadirHistorialPaciente(DNI, h);
-
-                    cout << "Historial añadido. Pulse ENTER para continuar..." << endl;
-                    cin.get();
-                    cin.clear();
+                    case_submenu_anadirHistorialMedico(aux);
 
                 }break;
 
                 case 6:{ // Añadir tratamiento
 
-                    GestorFichero f;
-                    string medicamento, fecha_inicio, fecha_fin, observaciones;
-
-                    cout << "Introduce nombre del medicamento/tratamiento:" << endl;
-                    cin.ignore();
-                    getline(cin, medicamento);
-                    if (f.buscarTratamiento(DNI, medicamento)){
-                        cout << "Este tratamiento para este paciente ya existe. Pulse ENTER para continuar..." << endl;
-                        cin.ignore();
-                        cin.get();
-                        break;
-                    }
-
-                    cout << "Introduce fecha de inicio (DD/MM/AAAA):" << endl;
-                    cin >> fecha_inicio; 
-
-                    cout << "Introduce fecha de fin (DD/MM/AAAA):" << endl;
-                    cin >> fecha_fin;
-
-                    cout << "Introduce alguna descripción u observaciones:" << endl;
-                    getline(cin, observaciones);
-
-                    Tratamiento t(medicamento, fecha_inicio, fecha_fin, observaciones);
-
-                    f.anadirTratamientoPaciente(DNI, t);
-
-                    cout << "Tratamiento añadido" << endl;
-                    cin.get();
-                    cin.clear();
+                    case_submenu_anadirTratamiento(aux);
 
                 }break;
 
                 case 7:{ // Eliminar tratamiento
                     
-                    GestorFichero f;
-                    list <Tratamiento> tratamientos = f.getTratamientosPaciente(DNI);
-                    if (tratamientos.size() == 0){
-                        cout << "No hay tratamientos. Pulse ENTER para continuar..." << endl;
-                        cin.ignore();
-                        cin.get();
-                        cin.clear();
-                    }
-                    cout << "Lista de tratamientos: " << endl;
-                    for(Tratamiento &t : tratamientos){
-                        cout << endl << "Medicamento/Tratamiento: " << t.getMedicamento() << endl;
-                    }
-
-                    string medicamento;
-                    cout << "Introduzca el nombre del tratamiento que desea eliminar:" << endl;
-                    getline(cin, medicamento);
-
-                    f.eliminarTratamiento(DNI, medicamento);
+                    case_submenu_eliminarTratamiento(aux);
 
                 }break;
 
                 case 8:{ // Mostrar tratamientos
-                    GestorFichero f;
-                    list <Tratamiento> tratamientos = f.getTratamientosPaciente(DNI);
-                    if (tratamientos.size() == 0){
-                        cout << "No hay tratamientos. Pulse ENTER para continuar..." << endl;
-                        cin.ignore();
-                        cin.get();
-                        cin.clear();
-                    }
-                    cout << "Lista de tratamientos: " << endl;
-                    for(Tratamiento &t : tratamientos){
-                        cout << endl << "Medicamento/Tratamiento: " << t.getMedicamento() << endl
-                             << "Fecha inicio: " << t.getFechaComienzo() << endl
-                             << "Fecha fin: " << t.getFechaFin() << endl
-                             << "Observaciones: " << t.getObservaciones() << endl << endl;
-                    }
-
-                    cout << "Pulse ENTER para continuar" << endl;
-                    cin.get();
-                    cin.clear();
+                    
+                    case_submenu_mostrarTratamientos(aux);
 
                 }break;
 
                 case 9:{ // Modificar tratamiento
+                    
+                    case_submenu_modificarTratamiento(aux);
 
-                    string medicamento;
                 }
 
                 case 10:{ // Volver atrás
@@ -607,4 +427,268 @@ void case_mostrarListaPacientes(){
     cout << "Pulse ENTER para continuar...";
     cin.ignore();
     cin.get();
+}
+
+void case_submenu_mostrarHistorial(Paciente p){
+    GestorFichero f;
+    list <ElementoHistorial> historial = f.getHistorialPaciente(p.getDNI());
+    if (historial.size() == 0){
+        cout << "El paciente " << p.getNombreCompleto() << " no tiene historial médico" << endl;
+        cout << "Pulse ENTER para continuar...";
+        cin.ignore();
+        cin.get();
+        
+    }
+    else{
+        cout << "Historial médico de " << p.getNombreCompleto() << ": " << endl;
+        for(list <ElementoHistorial>::iterator it = historial.begin(); it != historial.end(); it++){
+            cout << it -> getFecha() << endl
+                    << it -> getObservaciones() << endl;
+        }
+        cout << "Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+    }
+}
+
+void case_submenu_mostrarCitas(Paciente p){
+    GestorFichero f;
+    list <Cita> citas = f.getProximasCitasPaciente(p.getDNI());
+    if (citas.size() == 0){
+        cout << "No hay citas. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+    }
+    else{
+        cout << "PRÓXIMAS CITAS DE " << p.getNombreCompleto() << ": " << endl;
+        for(Cita &c : citas){
+            cout << c.getFecha() << " a las " << c.getHora() << endl
+                    << "Duración: " << c.getDuracion() << " minutos" << endl;
+        }
+    }
+    cin.ignore();
+    cin.get();
+}
+
+void case_submenu_eliminarCita(Paciente p){
+    GestorFichero f;
+    list <Cita> citas = f.getProximasCitasPaciente(p.getDNI());
+
+    if (citas.size() != 0){
+        cout << "PRÓXIMAS CITAS DE " << p.getNombreCompleto() << ": " << endl;
+        for(Cita &c : citas){
+            cout << c.getFecha() << " a las " << c.getHora() << endl
+                    << "Duración: " << c.getDuracion() << " minutos" << endl;
+        }
+        
+        cout << "Introduzca fecha de la cita a eliminar:" << endl;
+        string fecha;
+        cin >> fecha;
+
+        cout << "Introduzca hora:" << endl;
+        string hora;
+        cin >> hora;
+        if (f.buscarCita(fecha, hora, p.getDNI())){
+            f.eliminarCita(p.getDNI(), fecha, hora);
+        }
+        else{
+            cout << "La cita indicada no existe." << endl;
+        }
+        cout << "Cita eliminada. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+    }
+    else{
+        cout << "No hay citas. Pulse ENTER para continuar" << endl;
+        cin.ignore();
+        cin.get();
+    }
+}
+
+void case_submenu_modificarCita(Paciente p){
+    GestorFichero f;
+    list <Cita> citas = f.getProximasCitasPaciente(p.getDNI());
+    if (citas.size() != 0){
+        cout << "PRÓXIMAS CITAS DE " << p.getNombreCompleto() << ": " << endl;
+        for(Cita &c : citas){
+            cout << c.getFecha() << " a las " << c.getHora() << endl
+                    << "Duración: " << c.getDuracion() << " minutos" << endl;
+        }
+
+        cout << "Va a modificar una cita" << endl;
+        cout << "Introduzca fecha:" << endl;
+        string fecha_a;
+        cin >> fecha_a;
+        cout << "Introduzca hora:" << endl;
+        string hora_a;
+        cin >> hora_a;
+
+        if (f.buscarCita(fecha_a, hora_a, p.getDNI())){
+            cout << "Introduzca fecha nueva:" << endl;
+            string fecha_n;
+            cin >> fecha_n;
+
+            cout << "Introduzca hora nueva:" << endl;
+            string hora_n;
+            cin >> hora_n;
+
+            cout << "Introduzca duración nueva: " << endl;
+            string duracion_n;
+            cin >> duracion_n;
+
+            Cita citaNueva(fecha_n, hora_n, stoi(duracion_n));
+
+            f.modificarCitaPaciente(p.getDNI(), fecha_a, hora_a, citaNueva);
+            cout << "Cita modificada. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+        }
+        else{
+            cout << "La cita indicada no existe. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+        }
+    }
+    else{
+        cout << "No hay citas. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+    }
+}
+
+void case_submenu_anadirHistorialMedico(Paciente p){
+     cout << "Introduzca la fecha:" << endl;
+    string fecha;
+    cin >> fecha;
+
+    cout << "Introduzca observaciones:" << endl;
+    string observaciones;
+    cin.ignore();
+    getline(cin, observaciones);
+    ElementoHistorial h(fecha, observaciones);
+
+    GestorFichero f;
+    f.anadirHistorialPaciente(p.getDNI(), h);
+
+    cout << "Historial añadido. Pulse ENTER para continuar..." << endl;
+    cin.get();
+    cin.clear();
+}
+
+void case_submenu_anadirTratamiento(Paciente p){
+    GestorFichero f;
+    string medicamento, fecha_inicio, fecha_fin, observaciones;
+
+    cout << "Introduce nombre del medicamento/tratamiento:" << endl;
+    cin.ignore();
+    getline(cin, medicamento);
+    if (f.buscarTratamiento(p.getDNI(), medicamento)){
+        cout << "Este tratamiento para este paciente ya existe. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+        return;
+    }
+
+    cout << "Introduce fecha de inicio (DD/MM/AAAA):" << endl;
+    cin >> fecha_inicio; 
+
+    cout << "Introduce fecha de fin (DD/MM/AAAA):" << endl;
+    cin >> fecha_fin;
+
+    cout << "Introduce alguna descripción u observaciones:" << endl;
+    getline(cin, observaciones);
+
+    Tratamiento t(medicamento, fecha_inicio, fecha_fin, observaciones);
+
+    f.anadirTratamientoPaciente(p.getDNI(), t);
+
+    cout << "Tratamiento añadido" << endl;
+    cin.get();
+    cin.clear();
+}
+
+void case_submenu_eliminarTratamiento(Paciente p){
+    GestorFichero f;
+    list <Tratamiento> tratamientos = f.getTratamientosPaciente(p.getDNI());
+    if (tratamientos.size() == 0){
+        cout << "No hay tratamientos. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+        cin.clear();
+    }
+    cout << "Lista de tratamientos: " << endl;
+    for(Tratamiento &t : tratamientos){
+        cout << endl << "Medicamento/Tratamiento: " << t.getMedicamento() << endl;
+    }
+
+    string medicamento;
+    cout << "Introduzca el nombre del tratamiento que desea eliminar:" << endl;
+    getline(cin, medicamento);
+
+    f.eliminarTratamiento(p.getDNI(), medicamento);
+}
+
+void case_submenu_mostrarTratamientos(Paciente p){
+    GestorFichero f;
+    list <Tratamiento> tratamientos = f.getTratamientosPaciente(p.getDNI());
+    if (tratamientos.size() == 0){
+        cout << "No hay tratamientos. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+        cin.clear();
+    }
+    cout << "Lista de tratamientos: " << endl;
+    for(Tratamiento &t : tratamientos){
+        cout << endl << "Medicamento/Tratamiento: " << t.getMedicamento() << endl
+                << "Fecha inicio: " << t.getFechaComienzo() << endl
+                << "Fecha fin: " << t.getFechaFin() << endl
+                << "Observaciones: " << t.getObservaciones() << endl << endl;
+    }
+
+    cout << "Pulse ENTER para continuar" << endl;
+    cin.get();
+    cin.clear();
+}
+
+void case_submenu_modificarTratamiento(Paciente p){
+    GestorFichero f;
+    list <Tratamiento> tratamientos = f.getTratamientosPaciente(p.getDNI());
+    if (tratamientos.size() == 0){
+        cout << "No hay tratamientos. Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+        cin.clear();
+    }
+    cout << "Lista de tratamientos: " << endl;
+    for(Tratamiento &t : tratamientos){
+        cout << endl << "Medicamento/Tratamiento: " << t.getMedicamento() << endl;
+    }
+
+    cout << "Escriba el nombre del tratamiento que desea modificar:" << endl;
+    string medicamento;
+    getline(cin, medicamento);
+    if (f.buscarTratamiento(p.getDNI(), medicamento)){
+        string medicamento_modificado, fecha_i, fecha_f, observaciones;
+        cout << "Introduzca nuevo nombre (si no desea cambiarlo introduzca el mismo):" << endl;
+        getline(cin, medicamento_modificado);
+
+        cout << "Introduzca fecha inicio (FORMATO DD/MM/AAAA):" << endl;
+        cin >> fecha_i;
+
+        cout << "Introduzca fecha de fin (FORMATO DD/MM/AAAA):" << endl;
+        cin >> fecha_f;
+
+        cout << "Introduzca observaciones o una breve descripcion:" << endl;
+        cin >> observaciones;
+
+        Tratamiento t(medicamento_modificado, fecha_i, fecha_f, observaciones);
+        f.modificarTratamiento(p.getDNI(), medicamento, t);
+
+        cout << "Tratamiento modificado. Pulse ENTER para continuar..." << endl;
+    }
+    else{
+        cout << "El tratamiento indicado no existe. Pulse una tecla para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+    }
 }

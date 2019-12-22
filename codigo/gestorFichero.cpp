@@ -45,7 +45,8 @@ list <Cita> GestorFichero::getCitasHoy(){
 
 	time_t t = time(0);
 	tm* now = localtime(&t);
-	string hoy = to_string(now -> tm_mday) + "/" + to_string(now -> tm_mon  + 1) + "/" + to_string(now -> tm_year + 1900);
+	string day = now->tm_mday < 10 ? "0" + now->tm_mday : std::to_string(now->tm_mday);
+	string hoy = day + "/" + to_string(now -> tm_mon  + 1) + "/" + to_string(now -> tm_year + 1900);
 
 	list <Cita> todas = getTodasCitas();
 	for(Cita &c : todas){
@@ -424,7 +425,6 @@ void GestorFichero::eliminarTratamiento(string DNI, string medicamento){
 		}
 		file.clear();
 		file.seekg(0, ios_base::beg);
-		cout << "countlines: " << countLines << endl;
 		int i = 0;
 		while(getline(file, line)){
 			if (line == medicamento){
@@ -433,7 +433,6 @@ void GestorFichero::eliminarTratamiento(string DNI, string medicamento){
 				}
 			}
 			else{
-				cout << "he llegado a else" << endl;
 				file_aux << line << endl;
 				i++;
 			}

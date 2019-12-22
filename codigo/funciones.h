@@ -33,4 +33,22 @@ void case_buscarPaciente();
 
 void case_mostrarListaPacientes();
 
+void case_submenu_mostrarHistorial(Paciente p);
+
+void case_submenu_mostrarCitas(Paciente p);
+
+void case_submenu_eliminarCita(Paciente p);
+
+void case_submenu_modificarCita(Paciente p);
+
+void case_submenu_anadirHistorialMedico(Paciente p);
+
+void case_submenu_anadirTratamiento(Paciente p);
+
+void case_submenu_eliminarTratamiento(Paciente p);
+
+void case_submenu_mostrarTratamientos(Paciente p);
+
+void case_submenu_modificarTratamiento(Paciente p);
+
 #endif
