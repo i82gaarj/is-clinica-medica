@@ -31,7 +31,8 @@
 
 #### Requisitos funcionales (ordenados por prioridad)
 1. Añadir nuevo paciente
-    - Nombre
+  - DNI
+  - Nombre
 	- Apellidos
 	- Fecha de nacimiento
 	- Teléfono
@@ -39,16 +40,12 @@
 	- Sexo
 2. Eliminar a un paciente
 3. Mostrar una lista de los pacientes
-4. Buscar a un paciente por nombre y apellidos
+4. Buscar a un paciente por DNI
 5. Mostrar el historial médico de un paciente
-    - Enfermedades
-	- Operaciones
-	- Análisis
-	- Alergias
-6. Modificar tratamiento actual de un paciente
+6. Modificar tratamiento de un paciente
 7. Modificar datos de un paciente
-8. Mostrar todas las citas previas de un paciente
-    - Fecha
+8. Mostrar todas las citas próximas de un paciente
+  - Fecha
 	- Hora
 9. Añadir cita a un paciente
 	- Fecha
@@ -56,6 +53,10 @@
 10. Eliminar cita de un paciente
 11. Añadir tratamiento a un paciente
 12. Modificar cita de un paciente
+13. Mostrar citas de hoy
+14. Añadir información al historial de un paciente
+15. Mostrar todos los tratamientos de un paciente
+16. Eliminar un tratamiento a un paciente
 
 #### Requisitos no funcionales
 * Sistema operativo Linux
@@ -64,4 +65,3 @@
 * Estabilidad del software
 * Rendimiento del software
 * Pedir confirmación antes de borrar algún dato
-* Evitar borrado de historial médico
