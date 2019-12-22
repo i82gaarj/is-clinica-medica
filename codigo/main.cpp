@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
 
-	int opcion;
+	int opcion = 0;
 
 	do{
 		system("clear");

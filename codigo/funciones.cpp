@@ -335,7 +335,7 @@ void case_anadirCita(){
         f.anadirCitaPaciente(DNI, c);
         
         cout << "Cita añadida. Pulse ENTER para continuar..." << endl;
-        cin.clear();
+        cin.ignore();
         cin.get();
         cin.clear();
     }
@@ -380,7 +380,7 @@ void case_buscarPaciente(){
     if (f.buscarPaciente(DNI) == true){
         Paciente aux = f.getPacienteFromDNI(DNI);
 
-        int opcion_submenu;
+        int opcion_submenu = 0;
         do{
             system("clear");
             mostrar_menu_paciente(aux);
@@ -593,6 +593,7 @@ void case_submenu_modificarCita(Paciente p){
         cout << "Introduzca fecha:" << endl;
         string fecha_a;
         cin >> fecha_a;
+
         cout << "Introduzca hora:" << endl;
         string hora_a;
         cin >> hora_a;
@@ -611,7 +612,7 @@ void case_submenu_modificarCita(Paciente p){
             cout << "Introduzca hora nueva:" << endl;
             string hora_n;
             cin >> hora_n;
-            if(!validarFecha(fecha_n)){
+            if(!validarHora(hora_n)){
                 cout << "Hora no válida. Operación cancelada. Pulse ENTER para continuar..." << endl;
                 cin.ignore();
                 cin.get();
@@ -649,9 +650,15 @@ void case_submenu_modificarCita(Paciente p){
 }
 
 void case_submenu_anadirHistorialMedico(Paciente p){
-     cout << "Introduzca la fecha:" << endl;
+    cout << "Introduzca la fecha:" << endl;
     string fecha;
     cin >> fecha;
+    if (!validarFecha(fecha)){
+        cout << "Fecha no válida. Pulse ENTER para continuar...";
+        cin.ignore();
+        cin.get();
+        return;
+    }
 
     cout << "Introduzca observaciones:" << endl;
     string observaciones;
@@ -663,8 +670,8 @@ void case_submenu_anadirHistorialMedico(Paciente p){
     f.anadirHistorialPaciente(p.getDNI(), h);
 
     cout << "Historial añadido. Pulse ENTER para continuar..." << endl;
+    cin.ignore();
     cin.get();
-    cin.clear();
 }
 
 void case_submenu_anadirTratamiento(Paciente p){
@@ -672,7 +679,6 @@ void case_submenu_anadirTratamiento(Paciente p){
     string medicamento, fecha_inicio, fecha_fin, observaciones;
 
     cout << "Introduce nombre del medicamento/tratamiento:" << endl;
-    cin.ignore();
     getline(cin, medicamento);
     if (f.buscarTratamiento(p.getDNI(), medicamento)){
         cout << "Este tratamiento para este paciente ya existe. Pulse ENTER para continuar..." << endl;
@@ -700,15 +706,16 @@ void case_submenu_anadirTratamiento(Paciente p){
     } 
 
     cout << "Introduce alguna descripción u observaciones:" << endl;
+    cin.ignore();
     getline(cin, observaciones);
 
     Tratamiento t(medicamento, fecha_inicio, fecha_fin, observaciones);
 
     f.anadirTratamientoPaciente(p.getDNI(), t);
 
-    cout << "Tratamiento añadido" << endl;
+    cout << "Tratamiento añadido. Pulse ENTER para continuar..." << endl;
+    cin.ignore();
     cin.get();
-    cin.clear();
 }
 
 void case_submenu_eliminarTratamiento(Paciente p){
@@ -777,8 +784,8 @@ void case_submenu_mostrarTratamientos(Paciente p){
     }
 
     cout << "Pulse ENTER para continuar" << endl;
+    cin.ignore();
     cin.get();
-    cin.clear();
 }
 
 void case_submenu_modificarTratamiento(Paciente p){
@@ -788,7 +795,7 @@ void case_submenu_modificarTratamiento(Paciente p){
         cout << "No hay tratamientos. Pulse ENTER para continuar..." << endl;
         cin.ignore();
         cin.get();
-        cin.clear();
+        return;
     }
     cout << "Lista de tratamientos: " << endl;
     for(Tratamiento &t : tratamientos){
@@ -805,9 +812,21 @@ void case_submenu_modificarTratamiento(Paciente p){
 
         cout << "Introduzca fecha inicio (FORMATO DD/MM/AAAA):" << endl;
         cin >> fecha_i;
+        if (!validarFecha(fecha_i)){
+            cout << "Fecha no válida. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+            return;
+        }
 
         cout << "Introduzca fecha de fin (FORMATO DD/MM/AAAA):" << endl;
         cin >> fecha_f;
+        if (!validarFecha(fecha_f)){
+            cout << "Fecha no válida. Pulse ENTER para continuar..." << endl;
+            cin.ignore();
+            cin.get();
+            return;
+        }
 
         cout << "Introduzca observaciones o una breve descripcion:" << endl;
         cin >> observaciones;
