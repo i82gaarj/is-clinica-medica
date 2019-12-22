@@ -1,7 +1,7 @@
 ## Mostrar citas de un paciente
 
 **ID**: 08
-**Descripción**: Una vez seleccionado el paciente, el sistema muestra por pantalla todas las citas previas y la actual del mismo.
+**Descripción**: Una vez seleccionado el paciente, el sistema muestra por pantalla sus próximas citas.
 
 **Actores principales**: Secretario
 
@@ -11,8 +11,8 @@
 **Flujo principal**:
 1. El secretario desea ver las citas previas del paciente hasta la fecha.
 1. Se le pedirá al secretario el nombre y apellidos del paciente y se buscará.
-1. El secretario selecciona la opción en el menú principal para ver todas las citas.
-1. El sistema muestra por pantalla todo el historial de citas médicas.
+1. El secretario selecciona la opción en el menú principal para ver las citas.
+1. El sistema muestra por pantalla las próximas citas médicas.
 
 **Postcondiciones**:
 

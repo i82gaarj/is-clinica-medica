@@ -10,7 +10,7 @@
 
 **Flujo principal**:
 1. El secretario desea modificar el tratamiento de un paciente.
-1. Se le pedirá al secretario el nombre y apellidos del paciente y se buscará.
+1. Se le pedirá al secretario el DNI del paciente y se buscará.
 1. El secretario selecciona la opción de modificar el tratamiento actual.
 1. El sistema muestra por pantalla el tratamiento actual del paciente y pide al secretario introducir el nuevo.
 1. El secretario introduce el nuevo tratamiento.

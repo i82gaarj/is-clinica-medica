@@ -1,7 +1,7 @@
 ## Eliminar a un paciente
 
 **ID**: 02
-**Descripción**: Se introducen el nombre y los apellidos del paciente a eliminar y el sistema lo elimina.
+**Descripción**: Se introduce el DNI del paciente a eliminar y el sistema lo elimina.
 
 **Actores principales**: Secretario
 
@@ -11,7 +11,7 @@
 **Flujo principal**:
 1. El secretario desea eliminar a un paciente de la lista.
 1. El secretario comienza seleccionando la opción del menú principal que corresponde a "Eliminar paciente".
-1. El secretario introduce el nombre y los apellidos del paciente.
+1. El secretario introduce el DNI del paciente.
 1. El sistema elimina al paciente de la lista.
 
 **Postcondiciones**:
