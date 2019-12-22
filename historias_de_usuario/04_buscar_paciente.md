@@ -1,5 +1,5 @@
 **ID**: 04
-**Nombre**: Buscar a un paciente por nombre y apellidos
+**Nombre**: Buscar a un paciente por DNI
 
 **Prioridad** (de 1 a 10): 6
 **Puntos estimado**: 3

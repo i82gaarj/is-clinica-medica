@@ -67,18 +67,6 @@ public:
         direccion_ = direccion;
     }
 
-    inline Tratamiento getTratamiento() const{
-
-    }
-
-    inline void setTratamiento(Tratamiento tratamiento){
-
-    }
-    
-    /*inline void finalizarTratamiento(){
-        tratamiento_ = NULL;
-    }*/
-
 };
 
 #endif

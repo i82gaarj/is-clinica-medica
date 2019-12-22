@@ -419,14 +419,23 @@ void case_mostrarListaPacientes(){
     GestorFichero f;
     list <Paciente> pacientes = f.getTodosPacientes();
 
-    cout << "PACIENTES EN EL SISTEMA: " << endl;
-    for(Paciente &p : pacientes){
-        cout << "DNI " << p.getDNI() << " - " << p.getNombreCompleto() << endl;
+    if (pacientes.size() == 0){
+        cout << "No hay ningun paciente todavía" << endl;
+        cout << "Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
     }
+    else{
+        cout << "PACIENTES EN EL SISTEMA: " << endl;
+        for(Paciente &p : pacientes){
+            cout << "DNI " << p.getDNI() << " - " << p.getNombreCompleto() << endl;
+        }
 
-    cout << "Pulse ENTER para continuar...";
-    cin.ignore();
-    cin.get();
+        cout << "Pulse ENTER para continuar..." << endl;
+        cin.ignore();
+        cin.get();
+    }
+    
 }
 
 void case_submenu_mostrarHistorial(Paciente p){
