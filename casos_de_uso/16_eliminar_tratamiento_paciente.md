@@ -1,6 +1,6 @@
 ## Eliminar tratamiento a un paciente
 
-**ID**: 13
+**ID**: 16
 **Descripción**: Se elimina el tratamiento de un paciente
 
 **Actores principales**: Secretario
