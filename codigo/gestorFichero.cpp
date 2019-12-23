@@ -279,7 +279,7 @@ list <Cita> GestorFichero::getProximasCitasPaciente(string DNI){
 
 	for(Cita &c : citas_paciente){
 		tm fechaCita;
-		strptime((c.getFecha() + " " + c.getHora()).c_str(), "%d/%m/%Y %H:%M", &fechaCita); // Convierte a "struct tm"
+		strptime((c.getFecha() + " " + c.getHora()).c_str(), "%d/%m/%Y %H:%M", &fechaCita); // Convierte a "struct tm" AVISO NO FUNCIONA EN WINDOWS
 		time_t fechaCita_ = mktime(&fechaCita); // Convierte a time_t
 		if ((difftime(fechaCita_, t)) > 0){ // Comparamos la fecha de hoy y de cada cita
 			proximas_citas_paciente.push_back(c);
