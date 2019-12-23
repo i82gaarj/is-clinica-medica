@@ -6,7 +6,7 @@
 **Actores principales**: Secretario
 
 **Precondiciones**:
-* Ninguna
+* El paciente debe existir en el sistema
 
 **Flujo principal**:
 1. El secretario desea ver los tratamientos de un paciente.
