@@ -21,3 +21,4 @@
 **Flujos alternativos**:
 
 3.a. Si no existe el paciente, se indicará
+5.a. Si no existe el tratamiento, se indicará
